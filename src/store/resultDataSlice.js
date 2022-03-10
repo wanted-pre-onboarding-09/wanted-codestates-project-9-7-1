@@ -1,3 +1,4 @@
+/* 수정을 대비하여 남겨두는 파일입니다. */
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {

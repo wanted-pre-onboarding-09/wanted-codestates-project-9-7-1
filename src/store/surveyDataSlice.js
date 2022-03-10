@@ -5,8 +5,8 @@ const initialState = {
   formData: [
     {
       title: '테스트1',
-      id: 1,
-      contents: [
+      formId: 1,
+      formData: [
         {
           id: 'name',
           type: 'text',
@@ -48,10 +48,30 @@ const initialState = {
           contents: '<p>(개인정보 수집 및 약관 내용)</p>',
         },
       ],
+      resultData: [
+        {
+          useId: 1,
+          name: '홍길동',
+          phone: '010-1234-0000',
+          address: '서울시 강남구 서초동',
+          input_0: '남성',
+          input_1: '',
+          agreement_0: true,
+        },
+        {
+          useId: 2,
+          name: '박동길',
+          phone: '010-2423-0000',
+          address: '서울시 성북구 길음동',
+          input_0: '남성',
+          input_1: '',
+          agreement_0: true,
+        },
+      ],
     },
     {
       title: '테스트2',
-      id: 2,
+      formId: 2,
       contents: [
         {
           id: 'name',
@@ -87,14 +107,32 @@ const initialState = {
           contents: '<p>(개인정보 수집 및 약관 내용)</p>',
         },
       ],
+      result: [
+        {
+          userId: 1,
+          name: '최호국',
+          phone: '010-4343-0000',
+          address: '서울시 용산구 청파',
+          input_0: 'XL',
+          agreement_0: true,
+        },
+        {
+          userId: 2,
+          name: '김솔비',
+          phone: '010-5334-0000',
+          address: '서울시 양천구 목2동',
+          input_0: 'S',
+          agreement_0: true,
+        },
+      ],
     },
   ],
 };
 
-const formDataSlice = createSlice({
+const surveyDataSlice = createSlice({
   name: 'formData',
   initialState,
   reducers: {},
 });
 
-export default formDataSlice.reducer;
+export default surveyDataSlice.reducer;
