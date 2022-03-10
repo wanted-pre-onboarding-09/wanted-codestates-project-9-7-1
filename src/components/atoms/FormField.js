@@ -1,35 +1,35 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Select from './Select';
+import OptionSelect from './OptionSelect';
 
 const FormField = () => {
-  const [title, setTitle] = useState('');
-  const [holder, setHolder] = useState('');
+  const [label, setLabel] = useState('');
+  const [placeholder, setPlaceholder] = useState('');
   const [memo, setMemo] = useState('');
-  const [select, setSelect] = useState('text');
-  const [checked, setChecked] = useState(true);
+  const [type, setType] = useState('text');
+  const [required, setRequired] = useState(true);
 
-  const titleChange = (event) => {
-    setTitle(event.target.value);
+  const labelChange = (event) => {
+    setLabel(event.target.value);
   };
 
-  const holderChange = (event) => {
-    setHolder(event.target.value);
+  const placeholderChange = (event) => {
+    setPlaceholder(event.target.value);
   };
 
-  const momoChange = (event) => {
+  const memoChange = (event) => {
     setMemo(event.target.value);
   };
 
-  const selectChange = (event) => {
-    setSelect(event.target.value);
+  const typeChange = (event) => {
+    setType(event.target.value);
   };
 
   return (
     <FieldBox>
       <Title>
         <div>
-          <select onChange={selectChange}>
+          <select onChange={typeChange}>
             <option value="text">텍스트</option>
             <option value="phone">전화번호</option>
             <option value="adress">주소</option>
@@ -38,33 +38,33 @@ const FormField = () => {
             <option value="agreement">이용약관</option>
           </select>
         </div>
-        <input placeholder="field title" value={title} onChange={titleChange} />
+        <input placeholder="field label" value={label} onChange={labelChange} />
         <div>
           <input
             type="checkbox"
-            checked={checked}
-            onChange={() => setChecked(!checked)}
+            checked={required}
+            onChange={() => setRequired(!required)}
           />{' '}
           필수
         </div>
         <div>drag</div>
         <div>x</div>
       </Title>
-      {select === 'text' || select === 'phone' ? (
+      {type === 'text' || type === 'phone' ? (
         <PlaceholderBox>
           <input
             placeholder="placeholder 예) '예) 11/10(토) 15:00'"
-            value={holder}
-            onChange={holderChange}
+            value={placeholder}
+            onChange={placeholderChange}
           />
         </PlaceholderBox>
-      ) : select === 'select' ? (
-        <Select className="inputbox" />
+      ) : type === 'select' ? (
+        <OptionSelect className="inputbox" />
       ) : null}
 
       <TextContainer id="text">
         <div>위지윅</div>
-        <TextBox placeholder="memo" value={memo} onChange={momoChange} />
+        <TextBox placeholder="memo" value={memo} onChange={memoChange} />
       </TextContainer>
     </FieldBox>
   );
