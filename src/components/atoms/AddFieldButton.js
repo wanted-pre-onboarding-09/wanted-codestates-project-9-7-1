@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonWrap = styled.div`
+const ButtonWrap = styled.button`
   min-width: 500px;
-  min-height: 48px;
+  min-height: 40px;
   font-size: 1rem;
-  line-height: 48px;
+  line-height: 40px;
   border-radius: 10px;
   border: 2px solid blue;
   text-align: center;
@@ -14,11 +14,13 @@ const ButtonWrap = styled.div`
     color: blue;
     font-weight: 700;
   }
+
   margin-top: 20px;
   padding-left: 10px;
   padding-right: 10px;
   cursor: pointer;
 `;
+
 function HeadLine() {
   const addField = () => {
     console.log('필드추가');
