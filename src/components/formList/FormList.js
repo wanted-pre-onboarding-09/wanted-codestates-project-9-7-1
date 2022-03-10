@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import FormContents from './FromContents';
 import FormHandler from './FormHandler';
 
@@ -332,7 +333,9 @@ function FormList() {
     <StyledFormList>
       {mock.map((el) => (
         <li key={el.id}>
-          <FormContents title={el.title} />
+          <Link to={`/user/${el.id}`}>
+            <FormContents title={el.title} />
+          </Link>
           <FormHandler id={el.id} />
         </li>
       ))}

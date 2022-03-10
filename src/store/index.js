@@ -1,5 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import dataSlice from './dataSlice';
 
-const store = configureStore({});
+const reducers = combineReducers({
+  data: dataSlice,
+});
+
+const store = configureStore({
+  reducer: reducers,
+});
 
 export default store;
