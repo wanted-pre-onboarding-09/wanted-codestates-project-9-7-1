@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   error: true,
-  formData: [
+  Data: [
     {
       title: '테스트1',
       formId: 1,
