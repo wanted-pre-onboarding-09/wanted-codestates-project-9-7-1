@@ -6,6 +6,7 @@ import InputImg from '../molecules/InputImg';
 import InputTitle from '../atoms/InputTitle';
 import Agreement from '../molecules/Agreement';
 import InputPhone from '../molecules/InputPhone';
+import InputAddress from '../molecules/InputAddress';
 
 const FormContainer = () => (
   <FormWrapper>
@@ -19,7 +20,7 @@ const FormContainer = () => (
     </InputContainer>
     <InputContainer>
       <InputTitle title="배송지" />
-      <InputBox />
+      <InputAddress />
     </InputContainer>
     <InputContainer>
       <InputTitle title="옵션" />
