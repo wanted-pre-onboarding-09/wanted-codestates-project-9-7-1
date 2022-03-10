@@ -21,10 +21,7 @@ const ButtonWrap = styled.button`
   cursor: pointer;
 `;
 
-function CreateFormButton() {
-  const addField = () => {
-    console.log('createForm');
-  };
+function AddFieldButton({ addField }) {
   return (
     <div>
       <ButtonWrap onClick={addField} />
@@ -32,4 +29,4 @@ function CreateFormButton() {
   );
 }
 
-export default CreateFormButton;
+export default AddFieldButton;

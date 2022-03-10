@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Home from './components/pages/Home';
 import Form from './components/pages/Form';
 import CreateFormPage from './components/pages/CreateFormPage';
+import FormField from './components/atoms/FormField';
 // import User from './components/pages/User';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/create" element={<CreateFormPage />} />
         <Route path="/Form" element={<Form />} />
         {/* <Route path="/user/:id" element={<User />} /> */}
+        <Route path="/formField" element={<FormField />} />
       </Routes>
     </WholeContainer>
   );
