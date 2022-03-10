@@ -16,7 +16,7 @@ FormContents.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-export default FormContents;
+export default React.memo(FormContents);
 
 const StyledFormTitle = styled.div`
   display: flex;
@@ -34,4 +34,14 @@ const StyledFormTitle = styled.div`
     background-color: #a0a0a0;
     cursor: pointer;
   }
+
+  // .Toastify__toast-container--top-right {
+  //   position: absolute;
+  //   right: 1000px;
+  // }
+
+  // .Toastify__toast-container--bottom-right {
+  //   bottom: 11em;
+  //   right: 1.5em;
+  // }
 `;
