@@ -20,7 +20,9 @@ const Dropdown = ({ options }) => {
     <DropdownContainer>
       <DropdownBox onClick={handleOptionList} active={isDropdown}>
         {selectedOption}
-        <ArrowImg rotation={isDropdown} />
+        <Arrow rotation={isDropdown}>
+          <IoIosArrowUp />
+        </Arrow>
       </DropdownBox>
       {isDropdown && (
         <OptionList active={isDropdown}>
@@ -80,7 +82,7 @@ const OptionItem = styled.li`
   }
 `;
 
-const ArrowImg = styled(IoIosArrowUp)`
+const Arrow = styled.div`
   position: absolute;
   top: 14px;
   right: 18px;
