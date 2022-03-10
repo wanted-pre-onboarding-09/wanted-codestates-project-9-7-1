@@ -7,17 +7,17 @@ const ButtonWrap = styled.button`
   font-size: 1rem;
   line-height: 30px;
   border-radius: 10px;
-  border: 2px solid blue;
-  background: blue;
+  border: ${(props) => (props.active ? '2px solid blue' : '2px solid gray')};
+  background: ${(props) => (props.active ? 'blue' : 'white')};
   text-align: center;
   margin-left: 5px;
-  /* ::before {
-    background: blue;
-  } */
+
   ::after {
     content: '저장하기';
-    color: white;
-    background: blue;
+    /* color: gray; */
+    color: ${(props) => (props.active ? 'white' : 'gray')};
+    /* background: white; */
+    background: ${(props) => (props.active ? 'blue' : 'white')};
     font-weight: 700;
   }
 
@@ -33,7 +33,7 @@ function SaveFormButton() {
   };
   return (
     <div>
-      <ButtonWrap onClick={saveForm} />
+      <ButtonWrap onClick={saveForm} active={!true} />
     </div>
   );
 }

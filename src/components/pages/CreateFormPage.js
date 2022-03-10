@@ -5,11 +5,12 @@ import InputWrap from '../atoms/InputTitleHeadLine';
 import FieldListHeadLine from '../atoms/FieldListHeadLIine';
 import AddFieldButton from '../atoms/AddFieldButton';
 import OpenFormButton from '../atoms/OpenFormButton';
-import SaveFormButton from '../atoms/SaveForm';
+import SaveFormButton from '../atoms/SaveFormButton';
 import FormField from '../atoms/FormField';
 
 const CreateFormWrap = styled.div`
   margin-top: 3rem;
+  margin-bottom: 3rem;
   display: flex;
   flex-direction: column;
 
@@ -23,16 +24,19 @@ const CreateFormWrap = styled.div`
 function CreateFormPage() {
   const [fieldNumber, setFieldNumber] = useState(1);
   const addField = () => {
-    console.log('클릭');
     setFieldNumber(fieldNumber + 1);
   };
+  const removeField = () => {
+    setFieldNumber(fieldNumber - 1);
+  };
+
   return (
     <CreateFormWrap>
       <TitleHeadLine />
       <InputWrap />
       <FieldListHeadLine />
-      {[...Array(fieldNumber)].map(() => {
-        return <FormField />;
+      {[...Array(fieldNumber)].map((n, idx) => {
+        return <FormField key={idx} removeField={removeField} />;
       })}
 
       <AddFieldButton addField={addField} />

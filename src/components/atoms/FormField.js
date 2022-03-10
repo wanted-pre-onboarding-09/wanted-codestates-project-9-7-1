@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import OptionSelect from './OptionSelect';
 
-const FormField = () => {
+const FormField = ({ removeField }) => {
   const [label, setLabel] = useState('');
   const [placeholder, setPlaceholder] = useState('');
   const [memo, setMemo] = useState('');
@@ -48,7 +48,11 @@ const FormField = () => {
           필수
         </div>
         <div>drag</div>
-        <div>x</div>
+        <div>
+          <button type="button" onClick={removeField}>
+            &times;
+          </button>
+        </div>
       </Title>
       {type === 'text' || type === 'phone' ? (
         <PlaceholderBox>
@@ -73,13 +77,15 @@ const FormField = () => {
 export default FormField;
 
 const FieldBox = styled.div`
-  width: 90%;
+  width: 100%;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border: 1px solid black;
+  border: 2px solid #e6e6e6;
   border-radius: 10px;
-  overflow: auto;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
 
   input {
     outline: unset;

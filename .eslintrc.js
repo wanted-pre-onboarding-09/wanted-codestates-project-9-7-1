@@ -20,6 +20,7 @@ module.exports = {
     'object-curly-newline': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'comma-dangle': 'off',
+    'no-unused-vars': 'off',
     semi: 'off',
     'space-before-function-paren': 'off',
     'prettier/prettier': [
