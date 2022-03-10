@@ -2,12 +2,14 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import Home from './components/pages/Home';
+import CreateFormPage from './components/pages/CreateFormPage';
 
 function App() {
   return (
     <WholeContainer>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/create" element={<CreateFormPage />} />
       </Routes>
     </WholeContainer>
   );

@@ -1,12 +1,7 @@
 import React from 'react';
-import HeadLine from '../atoms/HeadLine';
 
 function Home() {
-  return (
-    <div>
-      <HeadLine />
-    </div>
-  );
+  return <div>홈입니다.</div>;
 }
 
 export default Home;
