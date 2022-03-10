@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import Home from './components/pages/Home';
 import Form from './components/pages/Form';
 import CreateFormPage from './components/pages/CreateFormPage';
-// import User from './components/pages/User';
+import FormField from './components/atoms/FormField';
+import User from './components/pages/User';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<CreateFormPage />} />
         <Route path="/form" element={<Form />} />
-        {/* <Route path="/user/:id" element={<User />} /> */}
+        <Route path="/user/:id" element={<User />} />
+        <Route path="/formField" element={<FormField />} />
       </Routes>
     </WholeContainer>
   );

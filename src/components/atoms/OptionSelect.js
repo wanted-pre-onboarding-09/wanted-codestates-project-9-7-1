@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const DropDown = () => {
-  const [inputVal, setInputVal] = useState('');
-  const [inputList, setInputList] = useState([]);
+const OptionSelect = () => {
+  const [optionVal, setOptionVal] = useState('');
+  const [options, setOptions] = useState([]);
 
   const onChange = (event) => {
-    setInputVal(event.target.value.trim());
+    setOptionVal(event.target.value.trim());
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
-    if (!inputVal.trim()) {
+    if (!optionVal.trim()) {
       return;
     }
-    setInputVal('');
-    setInputList((currentArray) => [...currentArray, inputVal]);
+    setOptionVal('');
+    setOptions((currentArray) => [...currentArray, optionVal]);
   };
 
   const deleteBtn = (event) => {
     const listId = event.target.parentNode.id;
-    inputList.splice(listId, 1);
-    const list = [...inputList];
-    setInputList(list);
+    options.splice(listId, 1);
+    const list = [...options];
+    setOptions(list);
   };
 
-  const pushTag = inputList.map((item, index) => (
+  const pushTag = options.map((item, index) => (
     <Menubox className="tag" id={index}>
       {item}
       <button type="button" className="delete_btn" onClick={deleteBtn}>
@@ -39,7 +39,7 @@ const DropDown = () => {
       <div>{pushTag}</div>
       <input
         onChange={onChange}
-        value={inputVal}
+        value={optionVal}
         placeholder="enter를 누르면 옵션을 추가 할 수 있습니다."
         type="text"
         className="inputBox"
@@ -48,7 +48,7 @@ const DropDown = () => {
   );
 };
 
-export default DropDown;
+export default OptionSelect;
 
 const DropDownBox = styled.form`
   border-bottom: 1px solid #cccccc;

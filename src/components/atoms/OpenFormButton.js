@@ -2,16 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ButtonWrap = styled.button`
-  min-width: 500px;
-  min-height: 40px;
+  min-width: 30px;
+  min-height: 30px;
   font-size: 1rem;
-  line-height: 40px;
+  line-height: 30px;
   border-radius: 10px;
-  border: 2px solid blue;
+  border: 2px solid #848484;
   text-align: center;
   ::after {
-    content: '필드 추가하기';
-    color: blue;
+    content: '폼 열기';
+    color: #848484;
     font-weight: 700;
   }
 
@@ -21,12 +21,15 @@ const ButtonWrap = styled.button`
   cursor: pointer;
 `;
 
-function AddFieldButton({ addField }) {
+function OpenFormButton() {
+  const openForm = () => {
+    console.log('openForm');
+  };
   return (
     <div>
-      <ButtonWrap onClick={addField} />
+      <ButtonWrap onClick={openForm} />
     </div>
   );
 }
 
-export default AddFieldButton;
+export default OpenFormButton;
