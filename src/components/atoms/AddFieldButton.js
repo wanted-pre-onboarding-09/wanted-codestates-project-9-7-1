@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ButtonWrap = styled.button`
-  min-width: 500px;
+  min-width: 600px;
   min-height: 40px;
   font-size: 1rem;
   line-height: 40px;
@@ -15,7 +15,14 @@ const ButtonWrap = styled.button`
     font-weight: 700;
   }
 
-  margin-top: 20px;
+  &:hover {
+    background: gray;
+    border: 2px solid gray;
+    ::after {
+      color: white;
+    }
+  }
+
   padding-left: 10px;
   padding-right: 10px;
   cursor: pointer;

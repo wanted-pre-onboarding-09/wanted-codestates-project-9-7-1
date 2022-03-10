@@ -26,18 +26,18 @@ function App() {
 export default App;
 
 const WholeContainer = styled.div`
-  width: 500px;
-  height: 100vh;
+  width: 600px;
+  height: auto;
   margin: 0 auto;
-  overflow-y: scroll;
-  position: relative;
-  ::-webkit-scrollbar {
-    /* Chrome, Safari, Opera*/
-    display: none;
-  }
-  -ms-overflow-style: none; /* IE and Edge */
-  .Toastify__toast-container {
-    position: absolute;
-    right: 0;
-  }
+//   overflow-y: scroll;
+//   position: relative;
+//   ::-webkit-scrollbar {
+//     /* Chrome, Safari, Opera*/
+//     display: none;
+//   }
+//   -ms-overflow-style: none; /* IE and Edge */
+//   .Toastify__toast-container {
+//     position: absolute;
+//     right: 0;
+//   }
 `;

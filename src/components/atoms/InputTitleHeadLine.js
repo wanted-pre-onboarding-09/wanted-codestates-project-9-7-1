@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const InputWrap = styled.input`
-  min-width: 500px;
+  min-width: 600px;
   min-height: 48px;
   font-size: 1rem;
   background: #e6e6e6;
