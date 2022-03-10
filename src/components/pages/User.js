@@ -1,51 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import Pagination from '../common/Pagination';
+import NotUser from '../common/NotUser';
 
 function User() {
+  const [page, setPage] = useState(1);
+  const limit = 1;
+  const offset = (page - 1) * limit;
+
+  const navigate = useNavigate();
   const { id } = useParams();
+
   const data = useSelector((state) => state.surveyData.data);
-  const list = data.find((el) => +el.formId === +id);
-  console.log(list);
+  const formItems = data.find((el) => +el.formId === +id);
+  const formUserData = formItems.resultData;
+
+  const handleClick = () => navigate('/');
+
   return (
     <StyledWrap>
-      <StyledTitle>{list.title}</StyledTitle>
-      {list.resultData.map((el) => (
-        <ul key={el.useId}>
-          {list.formData.map((menu) => (
-            <li key={menu.id}>
-              <div className="item-title-wrap">
-                <div className="item-title">{menu.label}</div>
-                <div className="item-required">
-                  {menu.required ? '필수요소' : null}
-                </div>
-              </div>
-              {menu.type === 'file' ? (
-                <img src={el[menu.id]} alt="이미지" />
-              ) : null}
-              {menu.type === 'agreement' ? (
-                <div className="item-text">
-                  {el[menu.id] ? '동의' : '동의하지 않음'}
-                </div>
-              ) : null}
-              {menu.type !== 'file' && menu.type !== 'agreement' ? (
-                <div className="item-text">{el[menu.id]}</div>
-              ) : null}
-            </li>
+      {!formUserData ? (
+        <NotUser />
+      ) : (
+        <>
+          <StyledTitle>
+            <AiOutlineArrowLeft onClick={handleClick} cursor="pointer" />
+            <p>{formItems.title}</p>
+          </StyledTitle>
+          {formUserData.slice(offset, offset + limit).map((el) => (
+            <ul key={el.useId}>
+              {formItems.formData.map((menu) => (
+                <li key={menu.id}>
+                  <div className="item-title-wrap">
+                    <div className="item-title">{menu.label}</div>
+                    <div className="item-required">
+                      {menu.required ? '필수' : null}
+                    </div>
+                  </div>
+                  {menu.type === 'file' ? (
+                    <img src={el[menu.id]} alt="이미지" />
+                  ) : null}
+                  {menu.type === 'agreement' ? (
+                    <div className="item-text">
+                      {el[menu.id] ? '동의' : '동의하지 않음'}
+                    </div>
+                  ) : null}
+                  {menu.type !== 'file' && menu.type !== 'agreement' ? (
+                    <div className="item-text">{el[menu.id]}</div>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
           ))}
-        </ul>
-      ))}
+          <Pagination total={data.length} page={page} setPage={setPage} />
+        </>
+      )}
     </StyledWrap>
   );
 }
 
 export default User;
 
-const StyledTitle = styled.p`
+const StyledTitle = styled.div`
+  display: flex;
   font-size: 30px;
+  align-items: center;
   text-align: center;
   font-weight: bold;
+  p {
+    margin: 0 auto;
+  }
 `;
 
 const StyledWrap = styled.div`
@@ -53,7 +80,7 @@ const StyledWrap = styled.div`
   ul {
     margin-top: 20px;
     padding: 20px;
-    border: solid 1px black;
+    border: solid 2px #34495e;
     border-radius: 5px;
   }
   li {
