@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+import { nanoid } from 'nanoid';
 import TitleHeadLine from '../atoms/TitleHeadLine';
 import InputWrap from '../atoms/InputTitleHeadLine';
 import FieldListHeadLine from '../atoms/FieldListHeadLIine';
@@ -22,12 +24,49 @@ const CreateFormWrap = styled.div`
 `;
 
 function CreateFormPage() {
-  const [fieldNumber, setFieldNumber] = useState(1);
+  const [formList, setFormList] = useState([
+    {
+      key: nanoid(),
+      id: 'name',
+      type: 'text',
+      required: true,
+      label: '이름',
+      placeholder: '주민등록상 이름 입력',
+    },
+  ]);
+
+  const [grabItem, setGrabItem] = useState();
+  const [interSectItem, setInterSectItem] = useState();
+
   const addField = () => {
-    setFieldNumber(fieldNumber + 1);
+    setFormList([
+      ...formList,
+      {
+        key: nanoid(),
+        id: 'name',
+        type: 'text',
+        required: true,
+        label: '이름',
+        placeholder: '주민등록상 이름 입력',
+      },
+    ]);
   };
-  const removeField = () => {
-    setFieldNumber(fieldNumber - 1);
+  const removeField = (e, idx) => {
+    setFormList(
+      formList.filter((form) => {
+        return form.key !== idx;
+      }),
+    );
+  };
+
+  const dragStart = (e, id) => {
+    e.dataTransfer.effectAllowed = 'move';
+    setGrabItem(id);
+  };
+
+  const dragEnter = (e, id) => {
+    console.log(`grabItem=${grabItem}`);
+    setInterSectItem(id);
   };
 
   return (
@@ -35,8 +74,16 @@ function CreateFormPage() {
       <TitleHeadLine />
       <InputWrap />
       <FieldListHeadLine />
-      {[...Array(fieldNumber)].map((n, idx) => {
-        return <FormField key={idx} removeField={removeField} />;
+      {formList.map((form, idx) => {
+        return (
+          <FormField
+            key={form.key}
+            idx={form.key}
+            removeField={(e) => removeField(e, form.key)}
+            onDragStart={(e) => dragStart(e, idx)}
+            onDragEnter={(e) => dragEnter(e, idx)}
+          />
+        );
       })}
 
       <AddFieldButton addField={addField} />

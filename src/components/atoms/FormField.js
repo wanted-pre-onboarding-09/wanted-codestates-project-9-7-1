@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import OptionSelect from './OptionSelect';
 
-const FormField = ({ removeField }) => {
+const FormField = ({ idx, removeField, dragStart, dragEnter, droping }) => {
   const [label, setLabel] = useState('');
   const [placeholder, setPlaceholder] = useState('');
   const [memo, setMemo] = useState('');
   const [type, setType] = useState('text');
   const [required, setRequired] = useState(true);
+  const [draggable, setDraggalble] = useState(false);
 
   const labelChange = (event) => {
     setLabel(event.target.value);
@@ -25,8 +26,21 @@ const FormField = ({ removeField }) => {
     setType(event.target.value);
   };
 
+  const dragTrueHandler = () => {
+    setDraggalble(true);
+  };
+
+  const dragFalseHandler = () => {
+    setDraggalble(false);
+  };
+
   return (
-    <FieldBox>
+    <FieldBox
+      draggable={draggable}
+      onDragStart={(e, id) => dragStart(e, id)}
+      onDragEnter={(e, id) => dragEnter(e, id)}
+      onDrop={(e, id) => droping(e, id)}
+    >
       <Title>
         <div>
           <select onChange={typeChange}>
@@ -47,9 +61,17 @@ const FormField = ({ removeField }) => {
           />{' '}
           필수
         </div>
-        <div>drag</div>
         <div>
-          <button type="button" onClick={removeField}>
+          <button
+            type="button"
+            onMouseDown={dragTrueHandler}
+            onMouseLeave={dragFalseHandler}
+          >
+            drag
+          </button>
+        </div>
+        <div>
+          <button type="button" id={idx} onClick={removeField}>
             &times;
           </button>
         </div>
