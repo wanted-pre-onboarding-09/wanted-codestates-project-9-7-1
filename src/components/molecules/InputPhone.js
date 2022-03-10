@@ -2,51 +2,58 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const InputBox = ({ placeholder, inputTitle }) => {
-  const [name, setName] = useState('');
+const InputPhone = ({ placeholder, inputTitle }) => {
+  const [phone, setPhone] = useState('');
+  const [isCheck, setIsCheck] = useState(true);
   const [isNull, setIsNull] = useState(false);
 
-  const handleBlur = () => {
-    if (name.length === 0) {
-      setIsNull(true);
-    }
-  };
+  const handleCheck = (e) => {
+    const value = e.target.value
+      .replace(/[^0-9]/, '')
+      .replace(/^(\d{3})(\d{4})(\d{4})$/, `$1-$2-$3`);
+    setPhone(value);
 
-  const handleChange = (e) => {
-    if (e.target.value.length > 0) {
-      setIsNull(false);
+    const regExp = /^\d{3}-\d{4}-\d{4}$/;
+
+    if (regExp.test(value)) {
+      setIsCheck(true);
     } else {
-      setIsNull(true);
+      setIsCheck(false);
     }
-    setName(e.target.value);
-  };
 
-  console.log(name);
+    if (e.target.value.length === 0) {
+      setIsNull(true);
+      setIsCheck(true);
+    } else {
+      setIsNull(false);
+    }
+  };
 
   return (
     <InputWrapper>
       <Input
-        warning={isNull}
+        onChange={handleCheck}
+        value={phone}
+        warning={isNull || !isCheck}
         placeholder={placeholder}
-        onBlur={handleBlur}
-        onChange={handleChange}
       />
       {isNull && <WarningText>{inputTitle} 항목은 필수 정보입니다</WarningText>}
+      {!isCheck && <WarningText>{inputTitle}가 올바르지 않습니다.</WarningText>}
     </InputWrapper>
   );
 };
 
-InputBox.propTypes = {
+InputPhone.propTypes = {
   placeholder: PropTypes.string,
   inputTitle: PropTypes.string,
 };
 
-InputBox.defaultProps = {
+InputPhone.defaultProps = {
   placeholder: '',
   inputTitle: '',
 };
 
-export default InputBox;
+export default InputPhone;
 
 const InputWrapper = styled.div`
   display: flex;
@@ -60,10 +67,10 @@ const Input = styled.input`
   margin-bottom: ${(props) => (props.warning ? '0px' : '24px')};
   background-color: #f8fafb;
   font-size: 16px;
-  border: ${(props) => (props.warning ? '1px solid #ff2e00' : 'none')};
+  border: none;
   border-radius: 8px;
   &:focus {
-    outline: ${(props) => (props.warning ? 'none' : '1px solid #000')};
+    outline: 1px solid #000;
   }
 `;
 
