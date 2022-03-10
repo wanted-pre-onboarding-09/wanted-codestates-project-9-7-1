@@ -19,7 +19,13 @@ export default Header;
 const StyeldHeader = styled.div`
   margin-top: 30px;
   h1 {
+    font-size: 24px;
+    font-weight: bold;
     text-align: center;
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: bold;
   }
   .header-bar {
     display: flex;

@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import FormContents from './FromContents';
 import FormHandler from './FormHandler';
+import Pagination from '../common/Pagination';
 
 function FormList() {
   const data = useSelector((state) => state.surveyData.data);
-  console.log(data);
+  const [page, setPage] = useState(1);
+  const limit = 5;
+  const offset = (page - 1) * limit;
   return (
     <StyledFormList>
-      {data.map((el) => (
+      {data.slice(offset, offset + limit).map((el) => (
         <li key={el.formId}>
           <FormContents title={el.title} />
-          <Link to={`/user/${el.formId}`}>
-            <FormHandler id={el.formId} />
-          </Link>
+          <FormHandler id={el.formId} />
         </li>
       ))}
+      <Pagination total={data.length} page={page} setPage={setPage} />
     </StyledFormList>
   );
 }
