@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import OptionSelect from './OptionSelect';
+import Editor from './Editor';
 
 const FormField = ({ idx, removeField, dragStart, dragEnter, droping }) => {
   const [label, setLabel] = useState('');
@@ -13,13 +14,8 @@ const FormField = ({ idx, removeField, dragStart, dragEnter, droping }) => {
   const labelChange = (event) => {
     setLabel(event.target.value);
   };
-
   const placeholderChange = (event) => {
     setPlaceholder(event.target.value);
-  };
-
-  const memoChange = (event) => {
-    setMemo(event.target.value);
   };
 
   const typeChange = (event) => {
@@ -87,10 +83,8 @@ const FormField = ({ idx, removeField, dragStart, dragEnter, droping }) => {
       ) : type === 'select' ? (
         <OptionSelect className="inputbox" />
       ) : null}
-
       <TextContainer id="text">
-        <div>위지윅</div>
-        <TextBox placeholder="memo" value={memo} onChange={memoChange} />
+        <Editor value={memo} setMemo={setMemo} />
       </TextContainer>
     </FieldBox>
   );
@@ -131,10 +125,6 @@ const PlaceholderBox = styled.div`
   input {
     width: 100%;
   }
-`;
-
-const TextBox = styled.input`
-  width: 100%;
 `;
 
 const TextContainer = styled.div`

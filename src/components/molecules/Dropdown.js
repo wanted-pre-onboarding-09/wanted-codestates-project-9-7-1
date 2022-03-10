@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Arrow from '../../assests/arrow.png';
+import { IoIosArrowUp } from 'react-icons/io';
 
 const Dropdown = ({ options }) => {
   const [selectedOption, setSelectedOption] = useState();
@@ -20,13 +20,18 @@ const Dropdown = ({ options }) => {
     <DropdownContainer>
       <DropdownBox onClick={handleOptionList} active={isDropdown}>
         {selectedOption}
-        <ArrowImg src={Arrow} rotation={isDropdown} />
+        <Arrow rotation={isDropdown}>
+          <IoIosArrowUp />
+        </Arrow>
       </DropdownBox>
       {isDropdown && (
         <OptionList active={isDropdown}>
-          {options.map((option) => (
-            <OptionItem onClick={() => handleSelectOption(option)}>
-              {option}
+          {Object.keys(options).map((key) => (
+            <OptionItem
+              key={key}
+              onClick={() => handleSelectOption(options[key])}
+            >
+              {options[key]}
             </OptionItem>
           ))}
         </OptionList>
@@ -77,7 +82,7 @@ const OptionItem = styled.li`
   }
 `;
 
-const ArrowImg = styled.img`
+const Arrow = styled.div`
   position: absolute;
   top: 14px;
   right: 18px;

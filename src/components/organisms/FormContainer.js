@@ -5,20 +5,22 @@ import InputBox from '../molecules/InputBox';
 import InputImg from '../molecules/InputImg';
 import InputTitle from '../atoms/InputTitle';
 import Agreement from '../molecules/Agreement';
+import InputPhone from '../molecules/InputPhone';
+import InputAddress from '../molecules/InputAddress';
 
 const FormContainer = () => (
   <FormWrapper>
     <InputContainer>
       <InputTitle title="이름" />
-      <InputBox placeholder="주민등록상 이름 입력" />
+      <InputBox placeholder="주민등록상 이름 입력" inputTitle="이름" />
     </InputContainer>
     <InputContainer>
       <InputTitle title="휴대폰 번호" />
-      <InputBox />
+      <InputPhone inputTitle="휴대폰 번호" />
     </InputContainer>
     <InputContainer>
       <InputTitle title="배송지" />
-      <InputBox />
+      <InputAddress />
     </InputContainer>
     <InputContainer>
       <InputTitle title="옵션" />
