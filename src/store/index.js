@@ -1,8 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import dataSlice from './dataSlice';
+import formDataSlice from './formDataSlice';
+import resultDataSlice from './resultDataSlice';
 
 const reducers = combineReducers({
-  data: dataSlice,
+  formData: formDataSlice,
+  resultData: resultDataSlice,
 });
 
 const store = configureStore({

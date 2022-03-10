@@ -11,6 +11,14 @@ const mockData = [
         attachFile: '',
         ruleAgree: true,
       },
+      {
+        name: '박동길',
+        phone: '010-2423-0000',
+        address: '서울시 성북구 길음동',
+        gender: '남성',
+        attachFile: '',
+        ruleAgree: true,
+      },
     ],
   },
   {
