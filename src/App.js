@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import Home from './components/pages/Home';
 import CreateFormPage from './components/pages/CreateFormPage';
+import User from './components/pages/User';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<CreateFormPage />} />
+        <Route path="/user/:id" element={<User />} />
       </Routes>
     </WholeContainer>
   );
