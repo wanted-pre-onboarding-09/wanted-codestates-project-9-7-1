@@ -15,7 +15,7 @@ function FormList() {
       {data.slice(offset, offset + limit).map((el) => (
         <li key={el.formId}>
           <FormContents title={el.title} />
-          <FormHandler id={el.formId} />
+          <FormHandler id={el.formId} title={el.title} />
         </li>
       ))}
       <Pagination total={data.length} page={page} setPage={setPage} />
