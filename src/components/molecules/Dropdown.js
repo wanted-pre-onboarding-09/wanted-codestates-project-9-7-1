@@ -24,9 +24,12 @@ const Dropdown = ({ options }) => {
       </DropdownBox>
       {isDropdown && (
         <OptionList active={isDropdown}>
-          {options.map((option) => (
-            <OptionItem onClick={() => handleSelectOption(option)}>
-              {option}
+          {Object.keys(options).map((key) => (
+            <OptionItem
+              key={key}
+              onClick={() => handleSelectOption(options[key])}
+            >
+              {options[key]}
             </OptionItem>
           ))}
         </OptionList>
