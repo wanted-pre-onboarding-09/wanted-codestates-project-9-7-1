@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<CreateFormPage />} />
-        <Route path="/form" element={<Form />} />
+        <Route path="/form/:id" element={<Form />} />
         <Route path="/user/:id" element={<User />} />
         <Route path="/formField" element={<FormField />} />
       </Routes>
@@ -29,15 +29,15 @@ const WholeContainer = styled.div`
   width: 600px;
   height: auto;
   margin: 0 auto;
-//   overflow-y: scroll;
-//   position: relative;
-//   ::-webkit-scrollbar {
-//     /* Chrome, Safari, Opera*/
-//     display: none;
-//   }
-//   -ms-overflow-style: none; /* IE and Edge */
-//   .Toastify__toast-container {
-//     position: absolute;
-//     right: 0;
-//   }
+  //   overflow-y: scroll;
+  //   position: relative;
+  //   ::-webkit-scrollbar {
+  //     /* Chrome, Safari, Opera*/
+  //     display: none;
+  //   }
+  //   -ms-overflow-style: none; /* IE and Edge */
+  //   .Toastify__toast-container {
+  //     position: absolute;
+  //     right: 0;
+  //   }
 `;
