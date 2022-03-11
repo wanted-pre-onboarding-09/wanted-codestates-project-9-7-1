@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { nanoid } from 'nanoid';
 import TitleHeadLine from '../atoms/TitleHeadLine';
@@ -9,6 +10,7 @@ import AddFieldButton from '../atoms/AddFieldButton';
 import OpenFormButton from '../atoms/OpenFormButton';
 import SaveFormButton from '../atoms/SaveFormButton';
 import FormField from '../atoms/FormField';
+import { addFormList, removeFormList } from '../../store/surveyDataSlice';
 
 const CreateFormWrap = styled.div`
   margin-top: 3rem;
@@ -24,39 +26,16 @@ const CreateFormWrap = styled.div`
 `;
 
 function CreateFormPage() {
-  const [formList, setFormList] = useState([
-    {
-      key: nanoid(),
-      id: 'name',
-      type: 'text',
-      required: true,
-      label: '이름',
-      placeholder: '주민등록상 이름 입력',
-    },
-  ]);
-
+  const formList = useSelector((state) => state.surveyData.data);
+  const dispatch = useDispatch();
   const [grabItem, setGrabItem] = useState();
   const [interSectItem, setInterSectItem] = useState();
 
   const addField = () => {
-    setFormList([
-      ...formList,
-      {
-        key: nanoid(),
-        id: 'name',
-        type: 'text',
-        required: true,
-        label: '이름',
-        placeholder: '주민등록상 이름 입력',
-      },
-    ]);
+    dispatch(addFormList());
   };
-  const removeField = (e, idx) => {
-    setFormList(
-      formList.filter((form) => {
-        return form.key !== idx;
-      }),
-    );
+  const removeField = (idx) => {
+    dispatch(removeFormList(idx));
   };
 
   const dragStart = (e, id) => {
@@ -79,9 +58,9 @@ function CreateFormPage() {
           <FormField
             key={form.key}
             idx={form.key}
-            removeField={(e) => removeField(e, form.key)}
-            onDragStart={(e) => dragStart(e, idx)}
-            onDragEnter={(e) => dragEnter(e, idx)}
+            removeField={() => removeField(form.key)}
+            dragStart={(e) => dragStart(e, idx)}
+            dragEnter={(e) => dragEnter(e, idx)}
           />
         );
       })}
