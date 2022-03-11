@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const InputPhone = ({ form }) => {
-  const [phone, setPhone] = useState('');
+const InputPhone = ({ form, phone, onAddPhone, onCheckValue }) => {
   const [isCheck, setIsCheck] = useState(true);
   const [isNull, setIsNull] = useState(false);
 
@@ -11,11 +10,12 @@ const InputPhone = ({ form }) => {
     const value = e.target.value
       .replace(/[^0-9]/, '')
       .replace(/^(\d{3})(\d{4})(\d{4})$/, `$1-$2-$3`);
-    setPhone(value);
+    onAddPhone('phone', value);
 
     const regExp = /^\d{3}-\d{4}-\d{4}$/;
     if (regExp.test(value)) {
       setIsCheck(true);
+      onCheckValue('isPhone', true);
     } else {
       setIsCheck(false);
     }

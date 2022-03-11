@@ -8,7 +8,16 @@ import Agreement from '../molecules/Agreement';
 import InputPhone from '../molecules/InputPhone';
 import InputAddress from '../molecules/InputAddress';
 
-const FormContainer = ({ selectedData }) => {
+const FormContainer = ({
+  selectedData,
+  name,
+  phone,
+  option,
+  img,
+  agreement,
+  onAdd,
+  onCheckValue,
+}) => {
   return (
     <FormWrapper>
       {selectedData.formData.map((form) => (
@@ -16,34 +25,65 @@ const FormContainer = ({ selectedData }) => {
           {form.id === 'name' && (
             <InputContainer>
               <InputTitle title={form.label} />
-              <InputName form={form} />
+              <InputName
+                form={form}
+                name={name}
+                onAddName={onAdd}
+                onCheckValue={onCheckValue}
+              />
             </InputContainer>
           )}
           {form.id === 'phone' && (
             <InputContainer>
               <InputTitle title={form.label} />
-              <InputPhone form={form} />
+              <InputPhone
+                form={form}
+                phone={phone}
+                onAddPhone={onAdd}
+                onCheckValue={onCheckValue}
+              />
             </InputContainer>
           )}
           {form.id === 'address' && (
             <InputContainer>
               <InputTitle title={form.label} />
-              <InputAddress form={form} />
+              <InputAddress
+                form={form}
+                onAddAddress={onAdd}
+                onCheckValue={onCheckValue}
+              />
             </InputContainer>
           )}
           {form.id === 'input_0' && (
             <InputContainer>
               <InputTitle title={form.label} />
-              <Dropdown form={form} />
+              <Dropdown
+                form={form}
+                option={option}
+                onAddOption={onAdd}
+                onCheckValue={onCheckValue}
+              />
             </InputContainer>
           )}
           {form.id === 'input_1' && (
             <InputContainer>
               <InputTitle title={form.label} />
-              <InputImg form={form} />
+              <InputImg
+                form={form}
+                img={img}
+                onAddImg={onAdd}
+                onCheckValue={onCheckValue}
+              />
             </InputContainer>
           )}
-          {form.id === 'agreement_0' && <Agreement form={form} />}
+          {form.id === 'agreement_0' && (
+            <Agreement
+              form={form}
+              agreement={agreement}
+              onAgreement={onAdd}
+              onCheckValue={onCheckValue}
+            />
+          )}
         </li>
       ))}
     </FormWrapper>

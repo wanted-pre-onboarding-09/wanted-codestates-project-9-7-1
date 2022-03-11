@@ -46,5 +46,6 @@ module.exports = {
     'react/jsx-key': 'off',
     'react/function-component-definition': 'off',
     'no-nested-ternary': 'off',
+    camelcase: 'off',
   },
 };

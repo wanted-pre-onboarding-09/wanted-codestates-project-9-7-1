@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import DaumPostcode from 'react-daum-postcode';
 import { VscClose } from 'react-icons/vsc';
 
-const InputAddress = ({ form }) => {
+const InputAddress = ({ form, onAddAddress, onCheckValue }) => {
   const detailRef = useRef('');
   const totalAddressRef = useRef('');
   const [isNull, setIsNull] = useState(false);
@@ -15,6 +15,7 @@ const InputAddress = ({ form }) => {
     setIsAddressModal(!isAddressModal);
     if (totalAddressRef.current.value.length === 0 && form.required) {
       setIsNull(true);
+      onCheckValue('isAddress', false);
     }
   };
 
@@ -23,6 +24,8 @@ const InputAddress = ({ form }) => {
     totalAddressRef.current.value = `${address} ${detailAddress}`;
     setIsAddressModal(false);
     setIsNull(false);
+    onCheckValue('isAddress', true);
+    onAddAddress('address', totalAddressRef.current.value);
   };
 
   const handleComplete = (data) => {
