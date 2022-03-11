@@ -2,26 +2,30 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineCamera, AiOutlinePlus } from 'react-icons/ai';
 
-const InputImg = () => {
+const InputImg = ({ form }) => {
   const imgRef = useRef();
-  const [img, setImg] = useState();
-  const [preview, setPreview] = useState();
+  // const [img, setImg] = useState();
+  const [preview, setPreview] = useState('');
+  const [isNull, setIsNull] = useState(false);
+
   const handleClick = (event) => {
     event.preventDefault();
     imgRef.current.click();
+    if (preview.length === 0 && form.required) {
+      setIsNull(true);
+    }
   };
-
-  console.log(img);
 
   const handleFileChange = (event) => {
     event.preventDefault();
     const reader = new FileReader();
     const file = event.target.files[0];
     reader.onloadend = () => {
-      setImg(file);
+      // setImg(file);
       setPreview(reader.result);
     };
     reader.readAsDataURL(file);
+    setIsNull(false);
   };
 
   return (
@@ -39,7 +43,10 @@ const InputImg = () => {
         </PlusText>
         <ImgButtonText preview={preview}>눌러서 파일을 등록</ImgButtonText>
       </InputImageBoxWrapper>
-      <SubText>첨부파일은 위와 같이 입력할 수 있습니다.</SubText>
+      <SubText>{form.description}</SubText>
+      {isNull && form.required && (
+        <WarningText>{form.label} 항목은 필수 정보입니다</WarningText>
+      )}
     </>
   );
 };
@@ -94,7 +101,14 @@ const ImgButtonText = styled.p`
   z-index: 10;
 `;
 
-const SubText = styled.p`
+const SubText = styled.div`
   font-size: 12px;
   margin-top: 12px;
+`;
+
+const WarningText = styled.p`
+  width: 100%;
+  margin: 8px 0 24px 0;
+  font-size: 12px;
+  color: #ff2e00;
 `;
