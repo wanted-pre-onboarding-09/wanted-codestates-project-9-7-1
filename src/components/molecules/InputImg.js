@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { AiOutlineCamera, AiOutlinePlus } from 'react-icons/ai';
 
 const InputImg = () => {
   const imgRef = useRef();
@@ -33,7 +34,9 @@ const InputImg = () => {
       />
       <InputImageBoxWrapper onClick={handleClick} preview={preview}>
         <InputImgBox preview={preview} />
-        <PlusText preview={preview}>+</PlusText>
+        <PlusText preview={preview}>
+          {preview ? <AiOutlineCamera /> : <AiOutlinePlus />}
+        </PlusText>
         <ImgButtonText preview={preview}>눌러서 파일을 등록</ImgButtonText>
       </InputImageBoxWrapper>
       <SubText>첨부파일은 위와 같이 입력할 수 있습니다.</SubText>
@@ -67,12 +70,15 @@ const InputImgBox = styled.div`
       props.preview &&
       'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))'},
     url(${(props) => props.preview && props.preview});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 
-const PlusText = styled.span`
+const PlusText = styled.div`
   position: absolute;
   top: 80px;
-  right: 206px;
+  right: 182px;
   color: ${(props) => (props.preview ? '#fff' : '#868e96')};
   font-size: 50px;
 `;
@@ -80,7 +86,7 @@ const PlusText = styled.span`
 const ImgButtonText = styled.p`
   position: absolute;
   bottom: 64px;
-  right: 164px;
+  right: 144px;
   font-weight: 500;
   border: none;
   color: ${(props) => (props.preview ? '#fff' : '#868e96')};
