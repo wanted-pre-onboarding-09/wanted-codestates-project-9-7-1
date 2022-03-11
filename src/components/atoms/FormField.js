@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import OptionSelect from './OptionSelect';
 import Editor from './Editor';
 
-const FormField = () => {
+const FormField = ({ idx, removeField, dragStart, dragEnter, droping }) => {
   const [label, setLabel] = useState('');
   const [placeholder, setPlaceholder] = useState('');
   const [memo, setMemo] = useState('');
   const [type, setType] = useState('text');
   const [required, setRequired] = useState(true);
+  const [draggable, setDraggalble] = useState(false);
 
   const labelChange = (event) => {
     setLabel(event.target.value);
@@ -21,8 +22,21 @@ const FormField = () => {
     setType(event.target.value);
   };
 
+  const dragTrueHandler = () => {
+    setDraggalble(true);
+  };
+
+  const dragFalseHandler = () => {
+    setDraggalble(false);
+  };
+
   return (
-    <FieldBox>
+    <FieldBox
+      draggable={draggable}
+      onDragStart={(e, id) => dragStart(e, id)}
+      onDragEnter={(e, id) => dragEnter(e, id)}
+      onDrop={(e, id) => droping(e, id)}
+    >
       <Title>
         <div>
           <select onChange={typeChange}>
@@ -43,8 +57,20 @@ const FormField = () => {
           />{' '}
           필수
         </div>
-        <div>drag</div>
-        <div>x</div>
+        <div>
+          <button
+            type="button"
+            onMouseDown={dragTrueHandler}
+            onMouseLeave={dragFalseHandler}
+          >
+            drag
+          </button>
+        </div>
+        <div>
+          <button type="button" id={idx} onClick={removeField}>
+            &times;
+          </button>
+        </div>
       </Title>
       {type === 'text' || type === 'phone' ? (
         <PlaceholderBox>
@@ -67,13 +93,15 @@ const FormField = () => {
 export default FormField;
 
 const FieldBox = styled.div`
-  width: 90%;
+  width: 100%;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border: 1px solid black;
+  border: 2px solid #e6e6e6;
   border-radius: 10px;
-  overflow: auto;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
 
   input {
     outline: unset;
