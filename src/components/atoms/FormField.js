@@ -94,7 +94,6 @@ export default FormField;
 
 const FieldBox = styled.div`
   width: 100%;
-  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -129,6 +128,6 @@ const PlaceholderBox = styled.div`
 
 const TextContainer = styled.div`
   div {
-    border-bottom: 1px solid #cccccc;
+    /* border-bottom: 1px solid #cccccc; */
   }
 `;
