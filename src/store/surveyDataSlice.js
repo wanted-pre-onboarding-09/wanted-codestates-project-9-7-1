@@ -29,10 +29,16 @@ const surveyDataSlice = createSlice({
     deleteForm(state, action) {
       state.data = state.data.filter((el) => el.formId !== +action.payload);
     },
+    addResultData(state, action) {
+      const selectedData = state.data.find(
+        (el) => el.formId === action.payload.formId,
+      );
+      selectedData.resultData.push(action.payload.inputs);
+    },
   },
 });
 
-export const { addFormList, removeFormList, deleteForm } =
+export const { addFormList, removeFormList, deleteForm, addResultData } =
   surveyDataSlice.actions;
 
 export default surveyDataSlice.reducer;
