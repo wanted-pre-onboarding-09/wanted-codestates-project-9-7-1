@@ -33,19 +33,10 @@ const StyledFormTitle = styled.div`
   }
   h3 {
     margin-left: 20px;
+    color: #000;
   }
   &:hover {
     background-color: #a0a0a0;
     cursor: pointer;
   }
-
-  // .Toastify__toast-container--top-right {
-  //   position: absolute;
-  //   right: 1000px;
-  // }
-
-  // .Toastify__toast-container--bottom-right {
-  //   bottom: 11em;
-  //   right: 1.5em;
-  // }
 `;
