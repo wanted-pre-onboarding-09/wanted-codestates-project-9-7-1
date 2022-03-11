@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { GrDocumentText } from 'react-icons/gr';
+import { Link } from 'react-router-dom';
 
-function FormContents({ title }) {
+function FormContents({ title, id }) {
   return (
-    <StyledFormTitle>
-      <GrDocumentText fill="rgb(255,255,255)" />
-      <h3>{title}</h3>
-    </StyledFormTitle>
+    <Link to={`/form/${id}`}>
+      <StyledFormTitle>
+        <GrDocumentText fill="rgb(255,255,255)" />
+        <h3>{title}</h3>
+      </StyledFormTitle>
+    </Link>
   );
 }
 
