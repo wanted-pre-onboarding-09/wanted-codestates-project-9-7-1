@@ -1,19 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import mock from '../data/mock';
 import { nanoid } from 'nanoid';
+import mock from '../data/mock';
 
 const initialState = {
   error: true,
-  data: [
-    {
-      key: nanoid(),
-      id: 'name',
-      type: 'text',
-      required: true,
-      label: '이름',
-      placeholder: '주민등록상 이름 입력',
-    },
-  ],
+  data: mock,
 };
 
 const surveyDataSlice = createSlice({

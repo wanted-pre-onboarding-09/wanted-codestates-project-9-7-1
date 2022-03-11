@@ -63,7 +63,7 @@ function FormList() {
       </StyledForm>
       {arr.slice(offset, offset + limit).map((el) => (
         <li key={el.formId}>
-          <FormContents title={el.title} />
+          <FormContents id={el.formId} title={el.title} />
           <FormHandler
             id={el.formId}
             title={el.title}

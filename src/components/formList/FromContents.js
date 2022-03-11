@@ -5,6 +5,7 @@ import { GrDocumentText } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 
 function FormContents({ title, id }) {
+  console.log(id);
   return (
     <Link to={`/form/${id}`}>
       <StyledFormTitle>
