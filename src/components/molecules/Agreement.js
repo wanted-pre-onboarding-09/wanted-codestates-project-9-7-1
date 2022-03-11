@@ -4,12 +4,12 @@ import { IoIosArrowForward } from 'react-icons/io';
 import CheckBox from '../atoms/CheckBox';
 import AgreementDetail from './AgreementDetail';
 
-const Agreement = ({ form }) => {
-  const [isCheck, setIsCheck] = useState(false);
+const Agreement = ({ form, agreement, onAgreement, onCheckValue }) => {
   const [isShowDetail, setIsShowDetail] = useState(false);
 
   const handleCheckBox = () => {
-    setIsCheck(!isCheck);
+    onAgreement('agreement_0', !agreement);
+    onCheckValue('isAgreement', !agreement);
   };
 
   const handleMoveDetail = () => {
@@ -20,7 +20,7 @@ const Agreement = ({ form }) => {
     <>
       <AgreementContainer>
         <AgreementBox onClick={handleCheckBox}>
-          <CheckBox isCheck={isCheck} />
+          <CheckBox isCheck={agreement} />
           <GuideText>
             {form.label} {form.required && '(필수)'}
           </GuideText>

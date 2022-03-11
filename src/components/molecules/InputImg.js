@@ -2,17 +2,17 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineCamera, AiOutlinePlus } from 'react-icons/ai';
 
-const InputImg = ({ form }) => {
+const InputImg = ({ form, img, onAddImg, onCheckValue }) => {
   const imgRef = useRef();
   // const [img, setImg] = useState();
-  const [preview, setPreview] = useState('');
   const [isNull, setIsNull] = useState(false);
 
   const handleClick = (event) => {
     event.preventDefault();
     imgRef.current.click();
-    if (preview.length === 0 && form.required) {
+    if (img.length === 0 && form.required) {
       setIsNull(true);
+      onCheckValue('isImg', false);
     }
   };
 
@@ -22,10 +22,11 @@ const InputImg = ({ form }) => {
     const file = event.target.files[0];
     reader.onloadend = () => {
       // setImg(file);
-      setPreview(reader.result);
+      onAddImg('input_1', reader.result);
     };
     reader.readAsDataURL(file);
     setIsNull(false);
+    onCheckValue('isImg', true);
   };
 
   return (
@@ -36,12 +37,12 @@ const InputImg = ({ form }) => {
         accept="image/*"
         onChange={handleFileChange}
       />
-      <InputImageBoxWrapper onClick={handleClick} preview={preview}>
-        <InputImgBox preview={preview} />
-        <PlusText preview={preview}>
-          {preview ? <AiOutlineCamera /> : <AiOutlinePlus />}
+      <InputImageBoxWrapper onClick={handleClick} preview={img}>
+        <InputImgBox preview={img} />
+        <PlusText preview={img}>
+          {img ? <AiOutlineCamera /> : <AiOutlinePlus />}
         </PlusText>
-        <ImgButtonText preview={preview}>눌러서 파일을 등록</ImgButtonText>
+        <ImgButtonText preview={img}>눌러서 파일을 등록</ImgButtonText>
       </InputImageBoxWrapper>
       <SubText>{form.description}</SubText>
       {isNull && form.required && (

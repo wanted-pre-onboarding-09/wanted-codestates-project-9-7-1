@@ -2,29 +2,30 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { IoIosArrowUp } from 'react-icons/io';
 
-const Dropdown = ({ form }) => {
-  const [selectedOption, setSelectedOption] = useState('');
+const Dropdown = ({ form, option, onAddOption, onCheckValue }) => {
   const [isDropdown, setIsDropdown] = useState(false);
   const [isNull, setIsNull] = useState(false);
 
   const handleOptionList = () => {
     setIsDropdown(!isDropdown);
-    if (selectedOption.length === 0 && isDropdown && form.required) {
+    if (option.length === 0 && isDropdown && form.required) {
       setIsNull(true);
+      onCheckValue('isOption', false);
     } else {
       setIsNull(false);
+      onCheckValue('isOption', true);
     }
   };
 
   const handleSelectOption = (option) => {
-    setSelectedOption(option);
     setIsDropdown(false);
+    onAddOption('input_0', option);
   };
 
   return (
     <DropdownContainer warning={isNull}>
       <DropdownBox onClick={handleOptionList} active={isDropdown}>
-        {selectedOption}
+        {option}
         <Arrow rotation={isDropdown}>
           <IoIosArrowUp />
         </Arrow>

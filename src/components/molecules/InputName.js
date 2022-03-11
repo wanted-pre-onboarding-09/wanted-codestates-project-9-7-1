@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const InputName = ({ form }) => {
-  const [name, setName] = useState('');
+const InputName = ({ form, name, onAddName, onCheckValue }) => {
   const [isNull, setIsNull] = useState(false);
 
   const handleBlur = () => {
     if (name.length === 0 && form.required) {
       setIsNull(true);
+      onCheckValue('isName', false);
     } else {
       setIsNull(false);
+      onCheckValue('isName', true);
     }
   };
 
   const handleChange = (e) => {
     if (e.target.value.length > 0) {
       setIsNull(false);
+      onCheckValue('isName', true);
     } else if (e.target.value.length === 0 && form.required) {
       setIsNull(true);
+      onCheckValue('isName', false);
     }
-    setName(e.target.value);
+    onAddName('name', e.target.value);
   };
 
   return (

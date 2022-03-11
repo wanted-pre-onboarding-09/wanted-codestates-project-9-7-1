@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const FormFooter = ({ disabled }) => (
+const FormFooter = ({ disabled, onSubmit }) => (
   <FormFooterContainer>
-    <SubmitButton disabled={disabled}>제출하기</SubmitButton>
+    <SubmitButton disabled={disabled} onClick={onSubmit}>
+      제출하기
+    </SubmitButton>
   </FormFooterContainer>
 );
 
