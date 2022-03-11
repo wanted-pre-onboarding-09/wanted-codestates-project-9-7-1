@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { IoIosArrowUp } from 'react-icons/io';
 
-const Dropdown = ({ options }) => {
-  const [selectedOption, setSelectedOption] = useState();
+const Dropdown = ({ form }) => {
+  const [selectedOption, setSelectedOption] = useState('');
   const [isDropdown, setIsDropdown] = useState(false);
+  const [isNull, setIsNull] = useState(false);
 
   const handleOptionList = () => {
     setIsDropdown(!isDropdown);
+    if (selectedOption.length === 0 && isDropdown && form.required) {
+      setIsNull(true);
+    } else {
+      setIsNull(false);
+    }
   };
 
   const handleSelectOption = (option) => {
@@ -17,21 +22,24 @@ const Dropdown = ({ options }) => {
   };
 
   return (
-    <DropdownContainer>
+    <DropdownContainer warning={isNull}>
       <DropdownBox onClick={handleOptionList} active={isDropdown}>
         {selectedOption}
         <Arrow rotation={isDropdown}>
           <IoIosArrowUp />
         </Arrow>
       </DropdownBox>
+      {isNull && form.required && (
+        <WarningText>{form.label} 항목은 필수 정보입니다</WarningText>
+      )}
       {isDropdown && (
         <OptionList active={isDropdown}>
-          {Object.keys(options).map((key) => (
+          {Object.keys(form.options).map((key) => (
             <OptionItem
               key={key}
-              onClick={() => handleSelectOption(options[key])}
+              onClick={() => handleSelectOption(form.options[key])}
             >
-              {options[key]}
+              {form.options[key]}
             </OptionItem>
           ))}
         </OptionList>
@@ -40,15 +48,11 @@ const Dropdown = ({ options }) => {
   );
 };
 
-Dropdown.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
-
 export default Dropdown;
 
 const DropdownContainer = styled.div`
   position: relative;
-  margin-bottom: 24px;
+  margin-bottom: ${(props) => (props.warning ? '0px' : '24px')};
 `;
 
 const DropdownBox = styled.div`
@@ -84,9 +88,19 @@ const OptionItem = styled.li`
 
 const Arrow = styled.div`
   position: absolute;
-  top: 14px;
+  top: 12px;
   right: 18px;
   width: 24px;
   height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transform: ${(props) => props.rotation && 'rotate(180deg)'};
+`;
+
+const WarningText = styled.p`
+  width: 100%;
+  margin: 8px 0 24px 0;
+  font-size: 12px;
+  color: #ff2e00;
 `;

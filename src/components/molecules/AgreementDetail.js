@@ -3,16 +3,16 @@ import styled from 'styled-components';
 import { IoIosArrowBack } from 'react-icons/io';
 import PropTypes from 'prop-types';
 
-const AgreementDetail = ({ handleMoveDetail }) => (
+const AgreementDetail = ({ label, contents, handleMoveDetail }) => (
   <AgreementDetailContainer>
     <DetailBox>
       <DetailHeader>
         <BackButton onClick={handleMoveDetail}>
           <IoIosArrowBack size="24" />
         </BackButton>
-        <DetailHeaderText> 개인정보 수집 약관 동의</DetailHeaderText>
+        <DetailHeaderText> {label}</DetailHeaderText>
       </DetailHeader>
-      <DetailContent>(개인정보 수집 및 약관 내용)</DetailContent>
+      <DetailContent>{contents}</DetailContent>
     </DetailBox>
   </AgreementDetailContainer>
 );

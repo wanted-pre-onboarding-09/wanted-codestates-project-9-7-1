@@ -1,52 +1,44 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
-const InputBox = ({ placeholder, inputTitle }) => {
+const InputName = ({ form }) => {
   const [name, setName] = useState('');
   const [isNull, setIsNull] = useState(false);
 
   const handleBlur = () => {
-    if (name.length === 0) {
+    if (name.length === 0 && form.required) {
       setIsNull(true);
+    } else {
+      setIsNull(false);
     }
   };
 
   const handleChange = (e) => {
     if (e.target.value.length > 0) {
       setIsNull(false);
-    } else {
+    } else if (e.target.value.length === 0 && form.required) {
       setIsNull(true);
     }
     setName(e.target.value);
   };
 
-  console.log(name);
-
   return (
     <InputWrapper>
       <Input
+        type={form.type}
         warning={isNull}
-        placeholder={placeholder}
+        placeholder={form.placeholder}
         onBlur={handleBlur}
         onChange={handleChange}
       />
-      {isNull && <WarningText>{inputTitle} 항목은 필수 정보입니다</WarningText>}
+      {isNull && form.required && (
+        <WarningText>{form.label} 항목은 필수 정보입니다</WarningText>
+      )}
     </InputWrapper>
   );
 };
 
-InputBox.propTypes = {
-  placeholder: PropTypes.string,
-  inputTitle: PropTypes.string,
-};
-
-InputBox.defaultProps = {
-  placeholder: '',
-  inputTitle: '',
-};
-
-export default InputBox;
+export default InputName;
 
 const InputWrapper = styled.div`
   display: flex;
