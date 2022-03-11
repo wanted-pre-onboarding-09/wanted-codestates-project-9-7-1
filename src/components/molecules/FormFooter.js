@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const FormFooter = () => (
+const FormFooter = ({ disabled }) => (
   <FormFooterContainer>
-    <SubmitButton>제출하기</SubmitButton>
+    <SubmitButton disabled={disabled}>제출하기</SubmitButton>
   </FormFooterContainer>
 );
 
@@ -19,6 +19,7 @@ const FormFooterContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 76px;
+  background-color: #fff;
 `;
 
 const SubmitButton = styled.button`
@@ -32,4 +33,8 @@ const SubmitButton = styled.button`
   border-radius: 8px;
   background-color: #f73256;
   color: #fff;
+  :disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
 `;
