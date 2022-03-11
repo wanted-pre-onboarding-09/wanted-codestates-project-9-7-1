@@ -7,6 +7,7 @@ import Pagination from '../common/Pagination';
 
 function FormList() {
   const data = useSelector((state) => state.surveyData.data);
+  const [render, setRender] = useState(false);
   const [arr, setArr] = useState([]);
   const [value, setValue] = useState('');
 
@@ -39,7 +40,7 @@ function FormList() {
 
   useEffect(() => {
     setArr([...data]);
-  }, []);
+  }, [render]);
 
   return (
     <StyledFormList>
@@ -62,8 +63,13 @@ function FormList() {
       </StyledForm>
       {arr.slice(offset, offset + limit).map((el) => (
         <li key={el.formId}>
-          <FormContents id={el.formId} title={el.title} />
-          <FormHandler id={el.formId} title={el.title} />
+          <FormContents title={el.title} />
+          <FormHandler
+            id={el.formId}
+            title={el.title}
+            render={render}
+            setRender={setRender}
+          />
         </li>
       ))}
       {arr.length !== 0 ? (
