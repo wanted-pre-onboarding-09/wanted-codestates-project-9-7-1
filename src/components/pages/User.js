@@ -107,6 +107,7 @@ const StyledWrap = styled.div`
     color: red;
   }
   img {
+    width: 100%;
     margin: 20px 0;
   }
 `;
