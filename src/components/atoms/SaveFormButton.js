@@ -28,9 +28,7 @@ const ButtonWrap = styled.button`
 `;
 
 function SaveFormButton() {
-  const saveForm = () => {
-    console.log('saveForm');
-  };
+  const saveForm = () => {};
   return (
     <div>
       <ButtonWrap onClick={saveForm} active={!true} />

@@ -44,7 +44,6 @@ function CreateFormPage() {
   };
 
   const dragEnter = (e, id) => {
-    console.log(`grabItem=${grabItem}`);
     setInterSectItem(id);
   };
 
