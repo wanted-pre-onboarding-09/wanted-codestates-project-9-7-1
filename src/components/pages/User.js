@@ -55,7 +55,11 @@ function User() {
               ))}
             </ul>
           ))}
-          <Pagination total={data.length} page={page} setPage={setPage} />
+          <Pagination
+            total={formUserData.length}
+            page={page}
+            setPage={setPage}
+          />
         </>
       )}
     </StyledWrap>
