@@ -19,7 +19,8 @@ function User() {
   const formUserData = formItems.resultData;
 
   const handleClick = () => navigate('/');
-
+  console.log(formUserData);
+  console.log(data, 'data');
   return (
     <StyledWrap>
       {!formUserData ? (
@@ -55,7 +56,11 @@ function User() {
               ))}
             </ul>
           ))}
-          <Pagination total={data.length} page={page} setPage={setPage} />
+          <Pagination
+            total={formUserData.length}
+            page={page}
+            setPage={setPage}
+          />
         </>
       )}
     </StyledWrap>
@@ -104,5 +109,6 @@ const StyledWrap = styled.div`
   }
   img {
     margin: 20px 0;
+    width: 100%;
   }
 `;
