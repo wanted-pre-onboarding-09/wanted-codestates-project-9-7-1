@@ -1,16 +1,25 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useRef } from 'react';
+/* eslint-disable prefer-destructuring */
+/* eslint-disable array-callback-return */
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { nanoid } from 'nanoid';
 import TitleHeadLine from '../atoms/TitleHeadLine';
 import InputWrap from '../atoms/InputTitleHeadLine';
 import FieldListHeadLine from '../atoms/FieldListHeadLIine';
 import AddFieldButton from '../atoms/AddFieldButton';
 import OpenFormButton from '../atoms/OpenFormButton';
 import SaveFormButton from '../atoms/SaveFormButton';
-import FormField from '../atoms/FormField';
-import { addFormList, removeFormList } from '../../store/surveyDataSlice';
+import TextField from '../atoms/Field/TextField';
+import PhoneField from '../atoms/Field/PhoneField';
+import AddressField from '../atoms/Field/AddressField';
+import SelectField from '../atoms/Field/SelectField';
+import FileField from '../atoms/Field/FileField';
+import AgreementField from '../atoms/Field/AgreementField';
+import {
+  updateFormList,
+  addFormList,
+  removeFormList,
+} from '../../store/surveyDataSlice';
 
 const CreateFormWrap = styled.div`
   margin-top: 3rem;
@@ -27,24 +36,37 @@ const CreateFormWrap = styled.div`
 
 function CreateFormPage() {
   const formList = useSelector((state) => state.surveyData.data);
+  const title = useSelector((state) => state.surveyData.title);
+  // const [formList, setFormList] = useState(list);
+  const [grabItem, setGrabItem] = useState(null);
   const dispatch = useDispatch();
-  const [grabItem, setGrabItem] = useState();
-  const [interSectItem, setInterSectItem] = useState();
+
+  const dragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const dragStart = (e, index) => {
+    setGrabItem(index);
+  };
+
+  const dragEnd = () => {};
+
+  const drop = (e, index) => {
+    const newList = [...formList];
+    newList[grabItem] = newList.splice(index, 1, newList[grabItem])[0];
+    dispatch(updateFormList(newList));
+  };
 
   const addField = () => {
     dispatch(addFormList());
   };
-  const removeField = (idx) => {
+
+  const removeField = (e, idx) => {
     dispatch(removeFormList(idx));
   };
 
-  const dragStart = (e, id) => {
-    e.dataTransfer.effectAllowed = 'move';
-    setGrabItem(id);
-  };
-
-  const dragEnter = (e, id) => {
-    setInterSectItem(id);
+  const saveForm = () => {
+    alert('저장완료');
   };
 
   return (
@@ -52,22 +74,126 @@ function CreateFormPage() {
       <TitleHeadLine />
       <InputWrap />
       <FieldListHeadLine />
-      {formList.map((form, idx) => {
-        return (
-          <FormField
-            key={form.key}
-            idx={form.key}
-            removeField={() => removeField(form.key)}
-            dragStart={(e) => dragStart(e, idx)}
-            dragEnter={(e) => dragEnter(e, idx)}
-          />
-        );
-      })}
+      {formList.map((form, index) => {
+        if (form.id === 'name') {
+          return (
+            <TextField
+              key={index}
+              index={index}
+              id={form.id}
+              type={form.type}
+              required={form.required}
+              label={form.label}
+              placeholder={form.placeholder}
+              dragOver={dragOver}
+              dragStart={(e) => dragStart(e, index)}
+              dragEnd={dragEnd}
+              drop={(e) => drop(e, index)}
+              removeField={(e) => removeField(e, index)}
+            />
+          );
+        }
+        if (form.id === 'phone') {
+          return (
+            <PhoneField
+              key={index}
+              index={index}
+              id={form.id}
+              type={form.type}
+              required={form.required}
+              label={form.label}
+              dragOver={dragOver}
+              dragStart={(e) => dragStart(e, index)}
+              dragEnd={dragEnd}
+              drop={drop}
+              removeField={(e) => removeField(e, index)}
+            />
+          );
+        }
+        if (form.id === 'address') {
+          return (
+            <AddressField
+              key={index}
+              index={index}
+              id={form.id}
+              type={form.type}
+              required={form.required}
+              label={form.label}
+              dragOver={dragOver}
+              dragStart={(e) => dragStart(e, index)}
+              dragEnd={dragEnd}
+              drop={drop}
+              removeField={(e) => removeField(e, index)}
+            />
+          );
+        }
+        if (form.id === 'input_0') {
+          return (
+            <SelectField
+              key={index}
+              index={index}
+              id={form.id}
+              type={form.type}
+              label={form.label}
+              options={form.options}
+              required={form.required}
+              dragOver={dragOver}
+              dragStart={(e) => dragStart(e, index)}
+              dragEnd={dragEnd}
+              drop={drop}
+              removeField={(e) => removeField(e, index)}
+            />
+          );
+        }
 
+        if (form.id === 'input_1') {
+          return (
+            <FileField
+              key={index}
+              index={index}
+              id={form.id}
+              type={form.type}
+              label={form.label}
+              required={form.required}
+              description={form.description}
+              dragOver={dragOver}
+              dragStart={(e) => dragStart(e, index)}
+              dragEnd={dragEnd}
+              drop={drop}
+              removeField={(e) => removeField(e, index)}
+            />
+          );
+        }
+
+        if (form.id === 'agreement_0') {
+          return (
+            <AgreementField
+              key={index}
+              index={index}
+              id={form.id}
+              type={form.type}
+              label={form.label}
+              required={form.required}
+              contents={form.contents}
+              dragOver={dragOver}
+              dragStart={(e) => dragStart(e, index)}
+              dragEnd={dragEnd}
+              drop={drop}
+              removeField={(e) => removeField(e, index)}
+            />
+          );
+        }
+      })}
       <AddFieldButton addField={addField} />
       <div className="open-save-Wrap">
         <OpenFormButton />
-        <SaveFormButton />
+        {formList.filter((form) => {
+          return form.label === '';
+        }).length === 0 && title ? (
+          <SaveFormButton active saveForm={saveForm} />
+        ) : (
+          <SaveFormButton active={false} />
+        )}
       </div>
     </CreateFormWrap>
   );

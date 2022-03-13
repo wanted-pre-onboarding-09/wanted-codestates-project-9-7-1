@@ -5,6 +5,8 @@ import WarningText from '../atoms/WarningText';
 
 const InputImg = ({ form, img, onAddImg, onCheckValue }) => {
   const imgRef = useRef();
+  // const [setImg] = useState();
+  // const [preview, setPreview] = useState();
   // const [img, setImg] = useState();
   const [isNull, setIsNull] = useState(true);
 

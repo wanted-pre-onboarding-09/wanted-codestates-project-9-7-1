@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import React from 'react';
@@ -11,14 +12,13 @@ const Container = styled.div`
   }
   .ql-toolbar {
     border: none;
-    border-bottom: 1px solid lightgray;
   }
   .ql-editor strong {
     font-weight: bold;
   }
 `;
 
-function Editor({ setMemo }) {
+function Editor({ value, onChange }) {
   const modules = {
     toolbar: {
       container: [
@@ -39,7 +39,14 @@ function Editor({ setMemo }) {
 
   return (
     <Container>
-      <ReactQuill modules={modules} theme="snow" onChange={setMemo} />
+      <ReactQuill
+        value={value || ''}
+        modules={modules}
+        theme="snow"
+        onChange={(content, delta, source, editor) =>
+          onChange(editor.getHTML())
+        }
+      />
     </Container>
   );
 }
