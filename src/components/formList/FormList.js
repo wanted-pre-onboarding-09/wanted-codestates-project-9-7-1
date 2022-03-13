@@ -75,7 +75,7 @@ function FormList() {
       {arr.length !== 0 ? (
         <Pagination total={arr.length} page={page} setPage={setPage} />
       ) : (
-        <p>검색 조건에 해당하는 form이 없습니다.</p>
+        <p>Form이 존재하지 않습니다.</p>
       )}
     </StyledFormList>
   );
