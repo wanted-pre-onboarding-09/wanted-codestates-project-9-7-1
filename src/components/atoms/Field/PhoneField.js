@@ -6,7 +6,7 @@ import {
   updateFieldType,
   updatePhoneField,
 } from '../../../store/surveyDataSlice';
-import moveGrab from '../../../assets/icons8-resize-vertical-24.png';
+// import moveGrab from '../../../assets/icons8-resize-vertical-24.png';
 import closeBtn from '../../../assets/icons8-close-144.png';
 
 const PhoneField = ({
@@ -207,7 +207,7 @@ const PhoneField = ({
             onMouseDown={dragTrueHandler}
             onMouseUp={dragFalseHandler}
           >
-            <img role="presentation" src={moveGrab} alt="없음" />
+            drag
           </div>
           <div className="btn-container">
             <img

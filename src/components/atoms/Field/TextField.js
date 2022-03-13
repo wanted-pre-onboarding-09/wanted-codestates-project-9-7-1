@@ -188,14 +188,6 @@ const TextField = ({
     setDraggalble(false);
   };
 
-  const pauseEvent = (e) => {
-    if (e.stopPropagation) e.stopPropagation();
-    if (e.preventDefault) e.preventDefault();
-    e.cancelBubble = true;
-    e.returnValue = false;
-    return false;
-  };
-
   return (
     <FieldBox
       draggable={draggable}
@@ -236,12 +228,7 @@ const TextField = ({
             onMouseDown={dragTrueHandler}
             onMouseUp={dragFalseHandler}
           >
-            <img
-              role="presentation"
-              src={moveGrab}
-              alt="없음"
-              onClick={pauseEvent}
-            />
+            drag
           </div>
           <div className="btn-container">
             <img
@@ -313,12 +300,15 @@ const Title = styled.div`
       justify-content: center;
       flex: 1 0 0;
       padding-left: 1rem;
-
-      >.grabbing
       cursor: grab;
 
       img {
         width: 35%;
+        -ms-user-select: none;
+        -moz-user-select: -moz-none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
       }
     }
 

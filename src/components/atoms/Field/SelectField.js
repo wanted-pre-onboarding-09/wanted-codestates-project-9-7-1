@@ -213,7 +213,7 @@ const SelectField = ({
             onMouseDown={dragTrueHandler}
             onMouseUp={dragFalseHandler}
           >
-            <img role="presentation" src={moveGrab} alt="없음" />
+            drag
           </div>
           <div className="btn-container">
             <img
