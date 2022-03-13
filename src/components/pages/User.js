@@ -19,8 +19,7 @@ function User() {
   const formUserData = formItems.resultData;
 
   const handleClick = () => navigate('/');
-  console.log(formUserData);
-  console.log(data, 'data');
+
   return (
     <StyledWrap>
       {!formUserData ? (
