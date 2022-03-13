@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import DaumPostcode from 'react-daum-postcode';
 import { VscClose } from 'react-icons/vsc';
+import WarningText from '../atoms/WarningText';
 
 const InputAddress = ({ form, onAddAddress, onCheckValue }) => {
   const detailRef = useRef('');
@@ -72,9 +73,7 @@ const InputAddress = ({ form, onAddAddress, onCheckValue }) => {
           <DaumPostcode style={postCodeStyle} onComplete={handleComplete} />
         </Background>
       )}
-      {isNull && form.required && (
-        <WarningText>{form.label} 항목은 필수 정보입니다</WarningText>
-      )}
+      {isNull && form.required && <WarningText label={form.label} />}
     </InputWrapper>
   );
 };
@@ -82,6 +81,7 @@ const InputAddress = ({ form, onAddAddress, onCheckValue }) => {
 export default InputAddress;
 
 const InputWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -91,7 +91,7 @@ const InputWrapper = styled.div`
 const AddressInput = styled.input`
   height: 50px;
   padding: 16px;
-  margin-bottom: ${(props) => (props.warning ? '0px' : '24px')};
+  margin-bottom: 26px;
   background-color: #f8fafb;
   font-size: 16px;
   border: ${(props) => (props.warning ? '1px solid #ff2e00' : 'none')};
@@ -99,7 +99,7 @@ const AddressInput = styled.input`
   cursor: pointer;
   &:focus {
     border: none;
-    outline: none;
+    outline: ${(props) => (props.warning ? 'none' : '1px solid #000')};
   }
 `;
 
@@ -182,11 +182,4 @@ const SubmitButton = styled.button`
   border-radius: 8px;
   background-color: #f73256;
   color: #fff;
-`;
-
-const WarningText = styled.p`
-  width: 100%;
-  margin: 8px 0 24px 0;
-  font-size: 12px;
-  color: #ff2e00;
 `;

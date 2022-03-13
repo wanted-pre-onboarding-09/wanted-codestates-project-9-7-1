@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import WarningText from '../atoms/WarningText';
+import WrongText from '../atoms/WrongText';
 
 const InputPhone = ({ form, phone, onAddPhone, onCheckValue }) => {
   const [isCheck, setIsCheck] = useState(true);
@@ -39,10 +41,8 @@ const InputPhone = ({ form, phone, onAddPhone, onCheckValue }) => {
         warning={isNull || !isCheck}
         placeholder={form.placeholder}
       />
-      {isNull && form.required && (
-        <WarningText>{form.label} 항목은 필수 정보입니다</WarningText>
-      )}
-      {!isCheck && <WarningText>{form.label}가 올바르지 않습니다.</WarningText>}
+      {isNull && form.required && <WarningText label={form.label} />}
+      {!isCheck && <WrongText label={form.label} />}
     </InputWrapper>
   );
 };
@@ -60,6 +60,7 @@ InputPhone.propTypes = {
 export default InputPhone;
 
 const InputWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -67,8 +68,9 @@ const InputWrapper = styled.div`
 `;
 
 const Input = styled.input`
+  height: 50px;
   padding: 16px;
-  margin-bottom: ${(props) => (props.warning ? '0px' : '24px')};
+  margin-bottom: 26px;
   background-color: #f8fafb;
   font-size: 16px;
   border: ${(props) => (props.warning ? '1px solid #ff2e00' : 'none')};
@@ -76,11 +78,4 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
-`;
-
-const WarningText = styled.p`
-  width: 100%;
-  margin: 8px 0 24px 0;
-  font-size: 12px;
-  color: #ff2e00;
 `;

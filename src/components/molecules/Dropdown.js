@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { IoIosArrowUp } from 'react-icons/io';
+import WarningText from '../atoms/WarningText';
 
 const Dropdown = ({ form, option, onAddOption, onCheckValue }) => {
   const [isDropdown, setIsDropdown] = useState(false);
@@ -24,14 +25,18 @@ const Dropdown = ({ form, option, onAddOption, onCheckValue }) => {
 
   return (
     <DropdownContainer warning={isNull}>
-      <DropdownBox onClick={handleOptionList} active={isDropdown}>
+      <DropdownBox
+        onClick={handleOptionList}
+        active={isDropdown}
+        warning={isNull}
+      >
         {option}
         <Arrow rotation={isDropdown}>
           <IoIosArrowUp />
         </Arrow>
       </DropdownBox>
       {isNull && form.required && (
-        <WarningText>{form.label} 항목은 필수 정보입니다</WarningText>
+        <WarningText bottom="-22px" label={form.label} />
       )}
       {isDropdown && (
         <OptionList active={isDropdown}>
@@ -53,18 +58,29 @@ export default Dropdown;
 
 const DropdownContainer = styled.div`
   position: relative;
-  margin-bottom: ${(props) => (props.warning ? '0px' : '24px')};
+  margin-bottom: 26px;
 `;
 
 const DropdownBox = styled.div`
   position: relative;
   z-index: 10;
-  height: 50.5px;
+  height: 50px;
   padding: 16px;
   margin: 10px 0 0 0;
   background-color: #f8fafb;
   border-radius: ${(props) => (props.active ? '8px 8px 0px 0px' : '8px')};
-  border: ${(props) => (props.active ? 'solid #000' : 'none')};
+  border: ${(props) => (props.active ? '1px solid #000' : 'none')};
+  border: ${(props) => (props.warning ? '1px solid #ff2e00' : 'none')};
+  border: ${(props) => {
+    if (props.active) {
+      return '1px solid #000';
+    }
+    if (props.warning) {
+      return '1px solid #ff2e00';
+    }
+    return 'none';
+  }};
+
   border-width: ${(props) => (props.active ? '1px 1px 0px 1px' : 'none')};
 `;
 
@@ -97,11 +113,4 @@ const Arrow = styled.div`
   justify-content: center;
   align-items: center;
   transform: ${(props) => props.rotation && 'rotate(180deg)'};
-`;
-
-const WarningText = styled.p`
-  width: 100%;
-  margin: 8px 0 24px 0;
-  font-size: 12px;
-  color: #ff2e00;
 `;

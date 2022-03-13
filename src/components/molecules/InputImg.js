@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineCamera, AiOutlinePlus } from 'react-icons/ai';
+import WarningText from '../atoms/WarningText';
 
 const InputImg = ({ form, img, onAddImg, onCheckValue }) => {
   const imgRef = useRef();
   // const [img, setImg] = useState();
-  const [isNull, setIsNull] = useState(false);
+  const [isNull, setIsNull] = useState(true);
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -30,7 +31,7 @@ const InputImg = ({ form, img, onAddImg, onCheckValue }) => {
   };
 
   return (
-    <>
+    <InputImgWrapper>
       <Input
         ref={imgRef}
         type="file"
@@ -44,15 +45,19 @@ const InputImg = ({ form, img, onAddImg, onCheckValue }) => {
         </PlusText>
         <ImgButtonText preview={img}>눌러서 파일을 등록</ImgButtonText>
       </InputImageBoxWrapper>
-      <SubText>{form.description}</SubText>
+      <SubText dangerouslySetInnerHTML={{ __html: form.description }} />
       {isNull && form.required && (
-        <WarningText>{form.label} 항목은 필수 정보입니다</WarningText>
+        <WarningText label={form.label} bottom="-20px" />
       )}
-    </>
+    </InputImgWrapper>
   );
 };
 
 export default InputImg;
+
+const InputImgWrapper = styled.div`
+  position: relative;
+`;
 
 const Input = styled.input`
   display: none;
@@ -105,11 +110,4 @@ const ImgButtonText = styled.p`
 const SubText = styled.div`
   font-size: 12px;
   margin-top: 12px;
-`;
-
-const WarningText = styled.p`
-  width: 100%;
-  margin: 8px 0 24px 0;
-  font-size: 12px;
-  color: #ff2e00;
 `;
