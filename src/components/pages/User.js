@@ -55,7 +55,11 @@ function User() {
               ))}
             </ul>
           ))}
-          <Pagination total={data.length} page={page} setPage={setPage} />
+          <Pagination
+            total={formUserData.length}
+            page={page}
+            setPage={setPage}
+          />
         </>
       )}
     </StyledWrap>
@@ -104,5 +108,6 @@ const StyledWrap = styled.div`
   }
   img {
     margin: 20px 0;
+    width: 100%;
   }
 `;
