@@ -11,7 +11,7 @@ InputTitle.propTypes = {
 export default InputTitle;
 
 const Title = styled.p`
-  margin: 3px 0;
+  margin: 4px 0;
   font-size: 12px;
   font-weight: 600;
 `;

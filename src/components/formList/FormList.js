@@ -7,6 +7,7 @@ import Pagination from '../common/Pagination';
 
 function FormList() {
   const data = useSelector((state) => state.surveyData.data);
+  const [render, setRender] = useState(false);
   const [arr, setArr] = useState([]);
   const [value, setValue] = useState('');
 
@@ -39,7 +40,7 @@ function FormList() {
 
   useEffect(() => {
     setArr([...data]);
-  }, []);
+  }, [render]);
 
   return (
     <StyledFormList>
@@ -62,14 +63,19 @@ function FormList() {
       </StyledForm>
       {arr.slice(offset, offset + limit).map((el) => (
         <li key={el.formId}>
-          <FormContents title={el.title} />
-          <FormHandler id={el.formId} title={el.title} />
+          <FormContents id={el.formId} title={el.title} />
+          <FormHandler
+            id={el.formId}
+            title={el.title}
+            render={render}
+            setRender={setRender}
+          />
         </li>
       ))}
       {arr.length !== 0 ? (
         <Pagination total={arr.length} page={page} setPage={setPage} />
       ) : (
-        <p>검색 조건에 해당하는 form이 없습니다.</p>
+        <p>Form이 존재하지 않습니다.</p>
       )}
     </StyledFormList>
   );

@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<CreateFormPage />} />
-        <Route path="/form" element={<Form />} />
+        <Route path="/form/:id" element={<Form />} />
         <Route path="/user/:id" element={<User />} />
       </Routes>
     </WholeContainer>

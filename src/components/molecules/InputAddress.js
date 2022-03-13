@@ -2,26 +2,36 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import DaumPostcode from 'react-daum-postcode';
 import { VscClose } from 'react-icons/vsc';
+import WarningText from '../atoms/WarningText';
 
-const InputAddress = () => {
-  const detailRef = useRef();
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDetail, setIsDetail] = useState(false);
+const InputAddress = ({ form, onAddAddress, onCheckValue }) => {
+  const detailRef = useRef('');
+  const totalAddressRef = useRef('');
+  const [isNull, setIsNull] = useState(false);
+  const [isAddressModal, setIsAddressModal] = useState(false);
+  const [isDetailModal, setIsDetailModal] = useState(false);
   const [address, setAddress] = useState('');
 
   const handleModal = () => {
-    setIsOpen(!isOpen);
+    setIsAddressModal(!isAddressModal);
+    if (totalAddressRef.current.value.length === 0 && form.required) {
+      setIsNull(true);
+      onCheckValue('isAddress', false);
+    }
   };
 
   const handleSubmitAddress = () => {
     const detailAddress = detailRef.current.value;
-    setAddress(`${address} ${detailAddress}`);
-    setIsOpen(false);
+    totalAddressRef.current.value = `${address} ${detailAddress}`;
+    setIsAddressModal(false);
+    setIsNull(false);
+    onCheckValue('isAddress', true);
+    onAddAddress('address', totalAddressRef.current.value);
   };
 
   const handleComplete = (data) => {
     setAddress(data.address);
-    setIsDetail(true);
+    setIsDetailModal(true);
   };
 
   const postCodeStyle = {
@@ -35,8 +45,12 @@ const InputAddress = () => {
 
   return (
     <InputWrapper>
-      <AddressBox onClick={handleModal}>{address}</AddressBox>
-      {isOpen && (
+      <AddressInput
+        ref={totalAddressRef}
+        onClick={handleModal}
+        warning={isNull}
+      />
+      {isAddressModal && (
         <Background>
           <ModalHeader>
             <CloseButton onClick={handleModal}>
@@ -44,7 +58,7 @@ const InputAddress = () => {
             </CloseButton>
             <ModalTitle>배송 주소</ModalTitle>
           </ModalHeader>
-          {isDetail && (
+          {isDetailModal && (
             <DetailBox>
               <AddressText>{address}</AddressText>
               <DetailAddressInput
@@ -59,6 +73,7 @@ const InputAddress = () => {
           <DaumPostcode style={postCodeStyle} onComplete={handleComplete} />
         </Background>
       )}
+      {isNull && form.required && <WarningText label={form.label} />}
     </InputWrapper>
   );
 };
@@ -66,21 +81,26 @@ const InputAddress = () => {
 export default InputAddress;
 
 const InputWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-top: 10px;
 `;
 
-const AddressBox = styled.div`
+const AddressInput = styled.input`
   height: 50px;
   padding: 16px;
-  margin-bottom: ${(props) => (props.warning ? '0px' : '24px')};
+  margin-bottom: 26px;
   background-color: #f8fafb;
   font-size: 16px;
   border: ${(props) => (props.warning ? '1px solid #ff2e00' : 'none')};
   border-radius: 8px;
   cursor: pointer;
+  &:focus {
+    border: none;
+    outline: ${(props) => (props.warning ? 'none' : '1px solid #000')};
+  }
 `;
 
 const Background = styled.div`

@@ -1,38 +1,94 @@
 import React from 'react';
 import styled from 'styled-components';
 import Dropdown from '../molecules/Dropdown';
-import InputBox from '../molecules/InputBox';
+import InputName from '../molecules/InputName';
 import InputImg from '../molecules/InputImg';
 import InputTitle from '../atoms/InputTitle';
 import Agreement from '../molecules/Agreement';
 import InputPhone from '../molecules/InputPhone';
 import InputAddress from '../molecules/InputAddress';
 
-const FormContainer = () => (
-  <FormWrapper>
-    <InputContainer>
-      <InputTitle title="이름" />
-      <InputBox placeholder="주민등록상 이름 입력" inputTitle="이름" />
-    </InputContainer>
-    <InputContainer>
-      <InputTitle title="휴대폰 번호" />
-      <InputPhone inputTitle="휴대폰 번호" />
-    </InputContainer>
-    <InputContainer>
-      <InputTitle title="배송지" />
-      <InputAddress />
-    </InputContainer>
-    <InputContainer>
-      <InputTitle title="옵션" />
-      <Dropdown options={['스몰', '미디움', '라지']} />
-    </InputContainer>
-    <InputContainer>
-      <InputTitle title="첨부파일" />
-      <InputImg />
-    </InputContainer>
-    <Agreement />
-  </FormWrapper>
-);
+const FormContainer = ({
+  selectedData,
+  name,
+  phone,
+  option,
+  img,
+  agreement,
+  onAdd,
+  onCheckValue,
+}) => {
+  return (
+    <FormWrapper>
+      {selectedData.formData.map((form) => (
+        <li key={form.id}>
+          {form.id === 'name' && (
+            <InputContainer>
+              <InputTitle title={form.label} />
+              <InputName
+                form={form}
+                name={name}
+                onAddName={onAdd}
+                onCheckValue={onCheckValue}
+              />
+            </InputContainer>
+          )}
+          {form.id === 'phone' && (
+            <InputContainer>
+              <InputTitle title={form.label} />
+              <InputPhone
+                form={form}
+                phone={phone}
+                onAddPhone={onAdd}
+                onCheckValue={onCheckValue}
+              />
+            </InputContainer>
+          )}
+          {form.id === 'address' && (
+            <InputContainer>
+              <InputTitle title={form.label} />
+              <InputAddress
+                form={form}
+                onAddAddress={onAdd}
+                onCheckValue={onCheckValue}
+              />
+            </InputContainer>
+          )}
+          {form.id === 'input_0' && (
+            <InputContainer>
+              <InputTitle title={form.label} />
+              <Dropdown
+                form={form}
+                option={option}
+                onAddOption={onAdd}
+                onCheckValue={onCheckValue}
+              />
+            </InputContainer>
+          )}
+          {form.id === 'input_1' && (
+            <InputContainer>
+              <InputTitle title={form.label} />
+              <InputImg
+                form={form}
+                img={img}
+                onAddImg={onAdd}
+                onCheckValue={onCheckValue}
+              />
+            </InputContainer>
+          )}
+          {form.id === 'agreement_0' && (
+            <Agreement
+              form={form}
+              agreement={agreement}
+              onAgreement={onAdd}
+              onCheckValue={onCheckValue}
+            />
+          )}
+        </li>
+      ))}
+    </FormWrapper>
+  );
+};
 
 export default FormContainer;
 

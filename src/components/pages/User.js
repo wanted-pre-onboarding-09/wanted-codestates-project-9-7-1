@@ -40,7 +40,7 @@ function User() {
                       {menu.required ? '필수' : null}
                     </div>
                   </div>
-                  {menu.type === 'file' ? (
+                  {menu.type === 'file' && el[menu.id] ? (
                     <img src={el[menu.id]} alt="이미지" />
                   ) : null}
                   {menu.type === 'agreement' ? (
@@ -55,7 +55,11 @@ function User() {
               ))}
             </ul>
           ))}
-          <Pagination total={data.length} page={page} setPage={setPage} />
+          <Pagination
+            total={formUserData.length}
+            page={page}
+            setPage={setPage}
+          />
         </>
       )}
     </StyledWrap>

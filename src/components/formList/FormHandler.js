@@ -7,11 +7,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { deleteForm } from '../../store/surveyDataSlice';
 
-function FormHandler({ id, title }) {
+function FormHandler({ id, title, render, setRender }) {
   const dispatch = useDispatch();
 
   const handleClick = (formId) => {
     dispatch(deleteForm(formId));
+    setRender(!render);
     toast.success(`${title} Form이 삭제되었습니다`, {
       autoClose: 1000,
       position: toast.POSITION.TOP_right,
@@ -33,9 +34,11 @@ function FormHandler({ id, title }) {
 FormHandler.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  render: PropTypes.bool.isRequired,
+  setRender: PropTypes.func.isRequired,
 };
 
-export default React.memo(FormHandler);
+export default FormHandler;
 
 const StyledFormHandler = styled.div`
   display: flex;

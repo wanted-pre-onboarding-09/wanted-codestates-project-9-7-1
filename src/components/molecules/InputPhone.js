@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import WarningText from '../atoms/WarningText';
+import WrongText from '../atoms/WrongText';
 
-const InputPhone = ({ placeholder, inputTitle }) => {
-  const [phone, setPhone] = useState('');
+const InputPhone = ({ form, phone, onAddPhone, onCheckValue }) => {
   const [isCheck, setIsCheck] = useState(true);
   const [isNull, setIsNull] = useState(false);
 
@@ -11,18 +12,20 @@ const InputPhone = ({ placeholder, inputTitle }) => {
     const value = e.target.value
       .replace(/[^0-9]/, '')
       .replace(/^(\d{3})(\d{4})(\d{4})$/, `$1-$2-$3`);
-    setPhone(value);
+    onAddPhone('phone', value);
 
     const regExp = /^\d{3}-\d{4}-\d{4}$/;
-
     if (regExp.test(value)) {
       setIsCheck(true);
+      onCheckValue('isPhone', true);
     } else {
       setIsCheck(false);
     }
 
-    if (e.target.value.length === 0) {
+    if (e.target.value.length === 0 && form.required) {
       setIsNull(true);
+      setIsCheck(true);
+    } else if (e.target.value.length === 0) {
       setIsCheck(true);
     } else {
       setIsNull(false);
@@ -32,30 +35,32 @@ const InputPhone = ({ placeholder, inputTitle }) => {
   return (
     <InputWrapper>
       <Input
+        type={form.type}
         onChange={handleCheck}
         value={phone}
         warning={isNull || !isCheck}
-        placeholder={placeholder}
+        placeholder={form.placeholder}
       />
-      {isNull && <WarningText>{inputTitle} 항목은 필수 정보입니다</WarningText>}
-      {!isCheck && <WarningText>{inputTitle}가 올바르지 않습니다.</WarningText>}
+      {isNull && form.required && <WarningText label={form.label} />}
+      {!isCheck && <WrongText label={form.label} />}
     </InputWrapper>
   );
 };
 
 InputPhone.propTypes = {
-  placeholder: PropTypes.string,
-  inputTitle: PropTypes.string,
-};
-
-InputPhone.defaultProps = {
-  placeholder: '',
-  inputTitle: '',
+  form: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
+    required: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default InputPhone;
 
 const InputWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -63,20 +68,14 @@ const InputWrapper = styled.div`
 `;
 
 const Input = styled.input`
+  height: 50px;
   padding: 16px;
-  margin-bottom: ${(props) => (props.warning ? '0px' : '24px')};
+  margin-bottom: 26px;
   background-color: #f8fafb;
   font-size: 16px;
-  border: none;
+  border: ${(props) => (props.warning ? '1px solid #ff2e00' : 'none')};
   border-radius: 8px;
   &:focus {
-    outline: 1px solid #000;
+    outline: none;
   }
-`;
-
-const WarningText = styled.p`
-  width: 100%;
-  margin: 8px 0 24px 0;
-  font-size: 12px;
-  color: #ff2e00;
 `;

@@ -1,14 +1,22 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineCamera, AiOutlinePlus } from 'react-icons/ai';
+import WarningText from '../atoms/WarningText';
 
-const InputImg = () => {
+const InputImg = ({ form, img, onAddImg, onCheckValue }) => {
   const imgRef = useRef();
-  const [setImg] = useState();
-  const [preview, setPreview] = useState();
+  // const [setImg] = useState();
+  // const [preview, setPreview] = useState();
+  // const [img, setImg] = useState();
+  const [isNull, setIsNull] = useState(true);
+
   const handleClick = (event) => {
     event.preventDefault();
     imgRef.current.click();
+    if (img.length === 0 && form.required) {
+      setIsNull(true);
+      onCheckValue('isImg', false);
+    }
   };
 
   const handleFileChange = (event) => {
@@ -16,33 +24,42 @@ const InputImg = () => {
     const reader = new FileReader();
     const file = event.target.files[0];
     reader.onloadend = () => {
-      setImg(file);
-      setPreview(reader.result);
+      // setImg(file);
+      onAddImg('input_1', reader.result);
     };
     reader.readAsDataURL(file);
+    setIsNull(false);
+    onCheckValue('isImg', true);
   };
 
   return (
-    <>
+    <InputImgWrapper>
       <Input
         ref={imgRef}
         type="file"
         accept="image/*"
         onChange={handleFileChange}
       />
-      <InputImageBoxWrapper onClick={handleClick} preview={preview}>
-        <InputImgBox preview={preview} />
-        <PlusText preview={preview}>
-          {preview ? <AiOutlineCamera /> : <AiOutlinePlus />}
+      <InputImageBoxWrapper onClick={handleClick} preview={img}>
+        <InputImgBox preview={img} />
+        <PlusText preview={img}>
+          {img ? <AiOutlineCamera /> : <AiOutlinePlus />}
         </PlusText>
-        <ImgButtonText preview={preview}>눌러서 파일을 등록</ImgButtonText>
+        <ImgButtonText preview={img}>눌러서 파일을 등록</ImgButtonText>
       </InputImageBoxWrapper>
-      <SubText>첨부파일은 위와 같이 입력할 수 있습니다.</SubText>
-    </>
+      <SubText dangerouslySetInnerHTML={{ __html: form.description }} />
+      {isNull && form.required && (
+        <WarningText label={form.label} bottom="-20px" />
+      )}
+    </InputImgWrapper>
   );
 };
 
 export default InputImg;
+
+const InputImgWrapper = styled.div`
+  position: relative;
+`;
 
 const Input = styled.input`
   display: none;
@@ -92,7 +109,7 @@ const ImgButtonText = styled.p`
   z-index: 10;
 `;
 
-const SubText = styled.p`
+const SubText = styled.div`
   font-size: 12px;
   margin-top: 12px;
 `;

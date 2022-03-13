@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 function Pagination({ total, page, setPage }) {
-  const numPages = Math.ceil(total / 5);
+  const numPages = Math.ceil(total / 1);
   const [pageCnt, setPageCnt] = useState(1);
   const [pageRange] = useState(5);
 
