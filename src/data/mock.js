@@ -68,7 +68,7 @@ const mock = [
   {
     title: '테스트2',
     formId: 2,
-    contents: [
+    formData: [
       {
         id: 'name',
         type: 'text',
@@ -125,7 +125,7 @@ const mock = [
   {
     title: '테스트3',
     formId: 3,
-    contents: [
+    formData: [
       {
         id: 'name',
         type: 'text',
@@ -182,7 +182,7 @@ const mock = [
   {
     title: '테스트4',
     formId: 4,
-    contents: [
+    formData: [
       {
         id: 'name',
         type: 'text',
@@ -239,7 +239,7 @@ const mock = [
   {
     title: '테스트5',
     formId: 5,
-    contents: [
+    formData: [
       {
         id: 'name',
         type: 'text',
@@ -296,7 +296,7 @@ const mock = [
   {
     title: '테스트6',
     formId: 6,
-    contents: [
+    formData: [
       {
         id: 'name',
         type: 'text',
@@ -353,7 +353,7 @@ const mock = [
   {
     title: '테스트7',
     formId: 7,
-    contents: [
+    formData: [
       {
         id: 'name',
         type: 'text',
@@ -410,7 +410,7 @@ const mock = [
   {
     title: '테스트8',
     formId: 8,
-    contents: [
+    formData: [
       {
         id: 'name',
         type: 'text',
