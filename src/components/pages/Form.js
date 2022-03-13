@@ -9,12 +9,11 @@ import FormContainer from '../organisms/FormContainer';
 
 const Form = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const datas = useSelector((state) => state.surveyData.data);
   const selectedData = datas.find((data) => data.formId === +id);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
     useId: Date.now(),
@@ -28,14 +27,26 @@ const Form = () => {
 
   const { name, phone, input_0, input_1, agreement_0 } = inputs;
 
+  const nameValue = selectedData.formData.find((el) => el.id === 'name');
+  const phoneValue = selectedData.formData.find((el) => el.id === 'phone');
+  const addressValue = selectedData.formData.find((el) => el.id === 'address');
+  const optionValue = selectedData.formData.find((el) => el.id === 'input_0');
+  const imgValue = selectedData.formData.find((el) => el.id === 'input_1');
+  const agreementValue = selectedData.formData.find(
+    (el) => el.id === 'agreement_0',
+  );
+
   const [isAllChecked, setIsAllChecked] = useState({
-    isName: true,
-    isPhone: true,
-    isAddress: true,
-    isOption: true,
-    isImg: true,
-    isAgreement: true,
+    isName: nameValue ? !nameValue.required : true,
+    isPhone: phoneValue ? !phoneValue.required : true,
+    isAddress: addressValue ? !addressValue.required : true,
+    isOption: optionValue ? !optionValue.required : true,
+    isImg: imgValue ? !imgValue.required : true,
+    isAgreement: agreementValue ? !agreementValue.required : true,
   });
+
+  const { isName, isPhone, isAddress, isOption, isImg, isAgreement } =
+    isAllChecked;
 
   const onAdd = (name, data) => {
     setInputs({ ...inputs, [name]: data });
@@ -71,31 +82,14 @@ const Form = () => {
         onAdd={onAdd}
         onCheckValue={onCheckValue}
       />
-      <FormFooter disabled={false} onSubmit={onSubmit} />
+      <FormFooter
+        active={
+          isName && isPhone && isAddress && isOption && isImg && isAgreement
+        }
+        onSubmit={onSubmit}
+      />
     </>
   );
 };
 
 export default Form;
-
-// useEffect(() => {
-//   selectedData.formData.forEach((form) => {
-//     if (form.id === 'name' && form.required) {
-//       setIsAllChecked({ ...isAllChecked, isName: false });
-//     }
-//   });
-// }, []);
-// else if (form.id === 'phone' && form.required) {
-//   setIsAllChecked({ ...isAllChecked, isPhone: false });
-// } else if (form.id === 'address' && form.required) {
-//   setIsAllChecked({ ...isAllChecked, isAddress: false });
-// } else if (form.id === 'input_0' && form.required) {
-//   setIsAllChecked({ ...isAllChecked, isOption: false });
-// } else if (form.id === 'input_1' && form.required) {
-//   setIsAllChecked({ ...isAllChecked, isImg: false });
-// } else if (form.id === 'agreement_0' && form.required) {
-//   setIsAllChecked({ ...isAllChecked, isAgreement: false });
-// }
-
-// const { isName, isPhone, isAddress, isOption, isImg, isAgreement } =
-//   isAllChecked;
