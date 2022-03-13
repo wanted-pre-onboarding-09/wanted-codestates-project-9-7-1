@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { addResultData } from '../../store/surveyDataSlice';
 import FormHeader from '../molecules/FormHeader';
 import FormFooter from '../molecules/FormFooter';
@@ -46,8 +47,11 @@ const Form = () => {
 
   const onSubmit = () => {
     dispatch(addResultData({ inputs, formId: selectedData.formId }));
-    alert('제출 완료');
-    navigate('/');
+    toast.success(`제출 완료되었습니다.`, {
+      autoClose: 1000,
+      position: toast.POSITION.TOP_right,
+    });
+    setTimeout(() => navigate('/'), 2000);
   };
 
   const handlePrev = () => {
