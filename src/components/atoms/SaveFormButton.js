@@ -27,13 +27,10 @@ const ButtonWrap = styled.button`
   cursor: pointer;
 `;
 
-function SaveFormButton() {
-  const saveForm = () => {
-    console.log('saveForm');
-  };
+function SaveFormButton({ active, saveForm }) {
   return (
     <div>
-      <ButtonWrap onClick={saveForm} active={!true} />
+      <ButtonWrap onClick={saveForm} active={active} />
     </div>
   );
 }

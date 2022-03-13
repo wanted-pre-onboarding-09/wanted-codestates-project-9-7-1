@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { updateTitle } from '../../store/surveyDataSlice';
 
 const InputWrap = styled.input`
   min-width: 600px;
@@ -15,10 +17,20 @@ const InputWrap = styled.input`
   padding-left: 10px;
   padding-right: 10px;
 `;
+
 function HeadLine() {
+  const [title, setTitle] = useState('');
+  const dispatch = useDispatch();
+
+  const titleHandler = (e) => {
+    setTitle(e.target.value);
+
+    dispatch(updateTitle(e.target.value));
+  };
+
   return (
     <div>
-      <InputWrap />
+      <InputWrap value={title} onChange={titleHandler} />
     </div>
   );
 }

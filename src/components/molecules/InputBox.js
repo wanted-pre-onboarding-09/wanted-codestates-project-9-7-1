@@ -21,8 +21,6 @@ const InputBox = ({ placeholder, inputTitle }) => {
     setName(e.target.value);
   };
 
-  console.log(name);
-
   return (
     <InputWrapper>
       <Input

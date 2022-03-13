@@ -4,14 +4,12 @@ import { AiOutlineCamera, AiOutlinePlus } from 'react-icons/ai';
 
 const InputImg = () => {
   const imgRef = useRef();
-  const [img, setImg] = useState();
+  const [setImg] = useState();
   const [preview, setPreview] = useState();
   const handleClick = (event) => {
     event.preventDefault();
     imgRef.current.click();
   };
-
-  console.log(img);
 
   const handleFileChange = (event) => {
     event.preventDefault();

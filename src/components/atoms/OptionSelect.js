@@ -1,32 +1,64 @@
+/* eslint-disable array-callback-return */
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { updateSelectField } from '../../store/surveyDataSlice';
 
-const OptionSelect = () => {
+const OptionSelect = ({ optionValue, index, id, type, label, required }) => {
+  const dispatch = useDispatch();
   const [optionVal, setOptionVal] = useState('');
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState(optionValue);
 
-  const onChange = (event) => {
-    setOptionVal(event.target.value.trim());
+  const onChange = (e) => {
+    setOptionVal(e.target.value.trim());
   };
 
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
     if (!optionVal.trim()) {
       return;
     }
     setOptionVal('');
-    setOptions((currentArray) => [...currentArray, optionVal]);
+
+    const newOptions = [...options, optionVal];
+    setOptions([...newOptions]);
+
+    dispatch(
+      updateSelectField({
+        index,
+        id,
+        type,
+        label,
+        required,
+        options: [...newOptions],
+      }),
+    );
   };
 
-  const deleteBtn = (event) => {
-    const listId = event.target.parentNode.id;
-    options.splice(listId, 1);
-    const list = [...options];
-    setOptions(list);
+  const deleteBtn = (e) => {
+    const listId = e.target.parentNode.id;
+    const newOption = [];
+    options.map((e, idx) => {
+      if (idx !== Number(listId)) {
+        newOption.push(e);
+      }
+    });
+    setOptions([...newOption]);
+
+    dispatch(
+      updateSelectField({
+        index,
+        id,
+        type,
+        label,
+        required,
+        options: [...newOption],
+      }),
+    );
   };
 
   const pushTag = options.map((item, index) => (
-    <Menubox className="tag" id={index}>
+    <Menubox className="tag" key={index} id={index}>
       {item}
       <button type="button" className="delete_btn" onClick={deleteBtn}>
         X
@@ -51,8 +83,6 @@ const OptionSelect = () => {
 export default OptionSelect;
 
 const DropDownBox = styled.form`
-  border-bottom: 1px solid #cccccc;
-
   div {
     width: 90%;
     margin: 0 auto;

@@ -22,9 +22,7 @@ const ButtonWrap = styled.button`
 `;
 
 function OpenFormButton() {
-  const openForm = () => {
-    console.log('openForm');
-  };
+  const openForm = () => {};
   return (
     <div>
       <ButtonWrap onClick={openForm} />
