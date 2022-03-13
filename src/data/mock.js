@@ -103,7 +103,7 @@ const mock = [
         contents: '<p>(개인정보 수집 및 약관 내용)</p>',
       },
     ],
-    result: [
+    resultData: [
       {
         userId: 1,
         name: '최호국',
@@ -160,7 +160,7 @@ const mock = [
         contents: '<p>(개인정보 수집 및 약관 내용)</p>',
       },
     ],
-    result: [
+    resultData: [
       {
         userId: 1,
         name: '최호국',
@@ -217,7 +217,7 @@ const mock = [
         contents: '<p>(개인정보 수집 및 약관 내용)</p>',
       },
     ],
-    result: [
+    resultData: [
       {
         userId: 1,
         name: '최호국',
@@ -274,7 +274,7 @@ const mock = [
         contents: '<p>(개인정보 수집 및 약관 내용)</p>',
       },
     ],
-    result: [
+    resultData: [
       {
         userId: 1,
         name: '최호국',
@@ -331,7 +331,7 @@ const mock = [
         contents: '<p>(개인정보 수집 및 약관 내용)</p>',
       },
     ],
-    result: [
+    resultData: [
       {
         userId: 1,
         name: '최호국',
@@ -388,7 +388,7 @@ const mock = [
         contents: '<p>(개인정보 수집 및 약관 내용)</p>',
       },
     ],
-    result: [
+    resultData: [
       {
         userId: 1,
         name: '최호국',
@@ -445,7 +445,7 @@ const mock = [
         contents: '<p>(개인정보 수집 및 약관 내용)</p>',
       },
     ],
-    result: [
+    resultData: [
       {
         userId: 1,
         name: '최호국',
