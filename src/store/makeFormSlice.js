@@ -52,6 +52,11 @@ const makeFormSlice = createSlice({
   name: 'makingForm',
   initialState,
   reducers: {
+    initializeData: (state) => {
+      state.title = '';
+      state.data = [];
+    },
+
     updateTitle: (state, action) => {
       state.title = action.payload;
     },
@@ -215,6 +220,7 @@ const makeFormSlice = createSlice({
 });
 
 export const {
+  initializeData,
   updateTitle,
   updateFormList,
   updateFieldType,

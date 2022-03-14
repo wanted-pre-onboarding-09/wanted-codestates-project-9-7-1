@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateTitle } from '../../store/makeFormSlice';
 
 const InputWrap = styled.input`
@@ -18,21 +18,25 @@ const InputWrap = styled.input`
   padding-right: 10px;
 `;
 
-function HeadLine() {
-  const [title, setTitle] = useState('');
+function InputTitleHeadLine() {
+  const initTitle = useSelector((state) => state.makeForm.title);
+  const [title, setTitle] = useState(initTitle);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setTitle(initTitle);
+  }, [initTitle]);
 
   const titleHandler = (e) => {
     setTitle(e.target.value);
-
     dispatch(updateTitle(e.target.value));
   };
 
   return (
     <div>
-      <InputWrap value={title} onChange={titleHandler} />
+      <InputWrap type="text" value={title} onChange={titleHandler} />
     </div>
   );
 }
 
-export default HeadLine;
+export default InputTitleHeadLine;
