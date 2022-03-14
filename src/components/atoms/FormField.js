@@ -3,7 +3,14 @@ import styled from 'styled-components';
 import OptionSelect from './OptionSelect';
 import Editor from './Editor';
 
-const FormField = ({ idx, removeField, dragStart, dragEnter, droping }) => {
+const FormField = ({
+  idx,
+  removeField,
+  dragStart,
+  dragEnd,
+  dropping,
+  dragOver,
+}) => {
   const [label, setLabel] = useState('');
   const [placeholder, setPlaceholder] = useState('');
   const [memo, setMemo] = useState('');
@@ -34,8 +41,9 @@ const FormField = ({ idx, removeField, dragStart, dragEnter, droping }) => {
     <FieldBox
       draggable={draggable}
       onDragStart={(e, id) => dragStart(e, id)}
-      onDragEnter={(e, id) => dragEnter(e, id)}
-      onDrop={(e, id) => droping(e, id)}
+      onDragEnd={dragEnd}
+      onDrop={dropping}
+      onDragOver={dragOver}
     >
       <Title>
         <div>
