@@ -52,15 +52,13 @@
 ## 작업 내용
 
 ### 유송현
-![image](https://user-images.githubusercontent.com/81687138/158105796-dfd0afe2-200e-4bad-b029-e54bb3692c3d.png)
-
-![image](https://user-images.githubusercontent.com/81687138/158105811-93d34a28-5fa1-4999-bcd4-c7d2aff60050.png)
-
 - 생성된 폼 목록 / 입력된 데이터 목록
   - 생성된 폼별로 제목 / 사용자 목록 / 삭제가능 하도록 구현하였습니다.
   - 작성한 폼이 많아질 경우를 고려해 pagination으로 5개씩 나누어 화면에 보여주었습니다.
   - 요구사항엔 없었지만 폼이 많아졌을 경우 사용자가 원하는 폼에 접근할 수 있도록 검색할 수 있는 기능을 추가하였습니다.
   - 입력된 데이터 목록 또한 pagination으로 구현하였으며, 사용자가 보기 쉽게 필수 요소인 경우 화면에 추가적으로 나타내었습니다.
+![image](https://user-images.githubusercontent.com/81687138/158105796-dfd0afe2-200e-4bad-b029-e54bb3692c3d.png)
+![image](https://user-images.githubusercontent.com/81687138/158105811-93d34a28-5fa1-4999-bcd4-c7d2aff60050.png)
 
 ### 서한석
 
