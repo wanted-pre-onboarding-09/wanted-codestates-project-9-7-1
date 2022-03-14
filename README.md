@@ -1,5 +1,5 @@
 # 데이터블 과제
-- gif 추가
+![title](http://fakeImgUrl.com/img/01.jpg){: width="33.3%" height="auto"}
 
 ## 프로젝트 소개
 
