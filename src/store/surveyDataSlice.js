@@ -7,6 +7,7 @@ const initialState = {
   // data: mock,
 
   title: '',
+  formId: 1,
   data: [
     {
       id: 'name',
