@@ -73,7 +73,7 @@ function FormList() {
         </li>
       ))}
       {arr.length !== 0 ? (
-        <Pagination total={arr.length} page={page} setPage={setPage} />
+        <Pagination total={arr.length} page={page} setPage={setPage} cnt={5} />
       ) : (
         <p>Form이 존재하지 않습니다.</p>
       )}

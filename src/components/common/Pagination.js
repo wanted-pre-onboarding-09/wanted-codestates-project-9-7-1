@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-function Pagination({ total, page, setPage }) {
-  const numPages = Math.ceil(total / 1);
+function Pagination({ total, page, setPage, cnt }) {
+  const numPages = Math.ceil(total / cnt);
   const [pageCnt, setPageCnt] = useState(1);
   const [pageRange] = useState(5);
 
@@ -44,6 +44,7 @@ Pagination.propTypes = {
   total: PropTypes.number.isRequired,
   page: PropTypes.number.isRequired,
   setPage: PropTypes.func.isRequired,
+  cnt: PropTypes.number.isRequired,
 };
 
 const StyledPageWrap = styled.div`
