@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import TitleHeadLine from '../atoms/TitleHeadLine';
 import InputTitleHeadLine from '../atoms/InputTitleHeadLine';
+import ShowListButton from '../atoms/ShowListButton';
 import FieldListHeadLine from '../atoms/FieldListHeadLIine';
 import AddFieldButton from '../atoms/AddFieldButton';
 import OpenFormButton from '../atoms/OpenFormButton';
@@ -31,6 +31,12 @@ const CreateFormWrap = styled.div`
   display: flex;
   flex-direction: column;
 
+  > .title-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
   > .open-save-Wrap {
     display: flex;
     flex-direction: row;
@@ -42,7 +48,6 @@ function CreateFormPage() {
   const formList = useSelector((state) => state.makeForm.data);
   const title = useSelector((state) => state.makeForm.title);
   const prevFormID = useSelector((state) => state.surveyData.maxID);
-  // const prevSurvay = useSelector((state) => state.surveyData.data);
   const [grabItem, setGrabItem] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const dispatch = useDispatch();
@@ -100,7 +105,10 @@ function CreateFormPage() {
       ) : (
         ''
       )}
-      <TitleHeadLine />
+      <div className="title-list">
+        <TitleHeadLine />
+        <ShowListButton />
+      </div>
       <InputTitleHeadLine />
       <FieldListHeadLine />
       {formList.map((form, index) => {
