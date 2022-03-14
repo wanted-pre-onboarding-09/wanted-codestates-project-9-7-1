@@ -1,9 +1,9 @@
 # 데이터블 과제
-![image](https://user-images.githubusercontent.com/81687138/158261092-a5097335-1c11-49d2-8b1a-6ab7e1a11ffb.png){: width="100" height="100"}
+![image](https://user-images.githubusercontent.com/81687138/158264305-6c1239ce-2b8b-4d11-9cc2-eb6f8b784ac0.png)
 
 ## 프로젝트 소개
 
-- 해시업 폼 구현하기
+- 해시업 폼 구현하기g
 - 기간: 22.03.10~22.03.11
 
 ## 배포링크
