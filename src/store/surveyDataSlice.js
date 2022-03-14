@@ -79,7 +79,6 @@ const surveyDataSlice = createSlice({
   initialState,
   reducers: {
     deleteForm(state, action) {
-      console.log(state);
       state.data = [state.data.filter((el) => el.formId !== +action.payload)];
     },
     updateTitle: (state, action) => {
@@ -87,7 +86,6 @@ const surveyDataSlice = createSlice({
     },
 
     updateFormList: (state, action) => {
-      console.log(action.payload);
       state.data = [...action.payload];
     },
 
