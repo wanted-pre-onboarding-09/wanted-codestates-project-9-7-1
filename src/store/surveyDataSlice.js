@@ -78,164 +78,16 @@ const surveyDataSlice = createSlice({
   name: 'formData',
   initialState,
   reducers: {
+    makeForm(state, action) {
+      console.log(action.payload);
+      state.maxID = action.payload.maxID;
+      state.data = [...state.data, action.payload.newForm];
+    },
+
     deleteForm(state, action) {
-      state.data = [state.data.filter((el) => el.formId !== +action.payload)];
-    },
-    updateTitle: (state, action) => {
-      state.title = action.payload;
+      state.data = state.data.filter((el) => el.formId !== +action.payload);
     },
 
-    updateFormList: (state, action) => {
-      state.data = [...action.payload];
-    },
-
-    updateFieldType: (state, action) => {
-      const initState = [...state.data];
-      const newFormList = [];
-      initState.map((form, idx) => {
-        if (idx === action.payload.index) {
-          newFormList.push(action.payload.newField);
-        } else {
-          newFormList.push(form);
-        }
-      });
-      state.data = [...newFormList];
-    },
-
-    updateTextField: (state, action) => {
-      const initState = [...state.data];
-      const newFormList = [];
-      initState.map((form, idx) => {
-        if (idx === action.payload.index) {
-          const newForm = {
-            id: action.payload.id,
-            type: action.payload.type,
-            required: action.payload.required,
-            label: action.payload.label,
-            placeholder: action.payload.placeholder,
-          };
-          newFormList.push(newForm);
-        } else {
-          newFormList.push(form);
-        }
-      });
-      state.data = [...newFormList];
-    },
-
-    updatePhoneField: (state, action) => {
-      const initState = [...state.data];
-      const newFormList = [];
-      initState.map((form, idx) => {
-        if (idx === action.payload.index) {
-          const newForm = {
-            id: action.payload.id,
-            type: action.payload.type,
-            required: action.payload.required,
-            label: action.payload.label,
-            placeholder: action.payload.placeholder,
-          };
-          newFormList.push(newForm);
-        } else {
-          newFormList.push(form);
-        }
-      });
-      state.data = [...newFormList];
-    },
-
-    updateAddressField: (state, action) => {
-      const initState = [...state.data];
-      const newFormList = [];
-      initState.map((form, idx) => {
-        if (idx === action.payload.index) {
-          const newForm = {
-            id: action.payload.id,
-            type: action.payload.type,
-            required: action.payload.required,
-            label: action.payload.label,
-          };
-          newFormList.push(newForm);
-        } else {
-          newFormList.push(form);
-        }
-      });
-      state.data = [...newFormList];
-    },
-
-    updateSelectField: (state, action) => {
-      const initState = [...state.data];
-      const newFormList = [];
-      initState.map((form, idx) => {
-        if (idx === action.payload.index) {
-          const newForm = {
-            id: action.payload.id,
-            type: action.payload.type,
-            label: action.payload.label,
-            options: action.payload.options,
-            required: action.payload.required,
-          };
-          newFormList.push(newForm);
-        } else {
-          newFormList.push(form);
-        }
-      });
-      state.data = [...newFormList];
-    },
-
-    updateFileField: (state, action) => {
-      const initState = [...state.data];
-      const newFormList = [];
-      initState.map((form, idx) => {
-        if (idx === action.payload.index) {
-          const newForm = {
-            id: action.payload.id,
-            type: action.payload.type,
-            label: action.payload.label,
-            required: action.payload.required,
-            description: action.payload.description,
-          };
-          newFormList.push(newForm);
-        } else {
-          newFormList.push(form);
-        }
-      });
-      state.data = [...newFormList];
-    },
-
-    updateAgreementField: (state, action) => {
-      const initState = [...state.data];
-      const newFormList = [];
-      initState.map((form, idx) => {
-        if (idx === action.payload.index) {
-          const newForm = {
-            id: action.payload.id,
-            type: action.payload.type,
-            label: action.payload.label,
-            required: action.payload.required,
-            cotents: action.payload.cotents,
-          };
-          newFormList.push(newForm);
-        } else {
-          newFormList.push(form);
-        }
-      });
-      state.data = [...newFormList];
-    },
-
-    addFormList(state) {
-      const newForm = {
-        id: 'name',
-        type: 'text',
-        required: true,
-        label: '이름',
-        placeholder: '주민등록상 이름 입력',
-      };
-      state.data = [...state.data, newForm];
-    },
-
-    removeFormList(state, action) {
-      const dataset = state.data.filter((form, idx) => idx !== action.payload);
-      state.data = dataset;
-    },
     addResultData(state, action) {
       const selectedData = state.data.find(
         (el) => el.formId === action.payload.formId,
@@ -245,20 +97,5 @@ const surveyDataSlice = createSlice({
   },
 });
 
-export const {
-  updateTitle,
-  updateFormList,
-  updateFieldType,
-  updateTextField,
-  updatePhoneField,
-  updateAddressField,
-  updateSelectField,
-  updateFileField,
-  updateAgreementField,
-  addFormList,
-  removeFormList,
-  deleteForm,
-  addResultData,
-} = surveyDataSlice.actions;
-
+export const { makeForm, deleteForm, addResultData } = surveyDataSlice.actions;
 export default surveyDataSlice.reducer;

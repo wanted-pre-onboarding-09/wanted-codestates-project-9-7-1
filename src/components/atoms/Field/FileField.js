@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import Editor from '../Editor';
-import {
-  updateFieldType,
-  updateFileField,
-} from '../../../store/surveyDataSlice';
+import { updateFieldType, updateFileField } from '../../../store/makeFormSlice';
 // import moveGrab from '../../../assets/icons8-resize-vertical-24.png';
 import closeBtn from '../../../assets/icons8-close-144.png';
 
