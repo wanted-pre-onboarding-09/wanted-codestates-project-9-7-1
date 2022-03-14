@@ -79,7 +79,6 @@ const surveyDataSlice = createSlice({
   initialState,
   reducers: {
     makeForm(state, action) {
-      console.log(action.payload);
       state.maxID = action.payload.maxID;
       state.data = [...state.data, action.payload.newForm];
     },

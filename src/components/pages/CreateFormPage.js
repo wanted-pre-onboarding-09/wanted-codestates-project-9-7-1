@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import TitleHeadLine from '../atoms/TitleHeadLine';
 import InputWrap from '../atoms/InputTitleHeadLine';
 import FieldListHeadLine from '../atoms/FieldListHeadLIine';
@@ -40,6 +41,7 @@ function CreateFormPage() {
   const title = useSelector((state) => state.makeForm.title);
   const prevFormID = useSelector((state) => state.surveyData.maxID);
   // const prevSurvay = useSelector((state) => state.surveyData.data);
+  const navigate = useNavigate();
   const [grabItem, setGrabItem] = useState(null);
   const dispatch = useDispatch();
 
@@ -75,9 +77,11 @@ function CreateFormPage() {
           title,
           formId: prevFormID + 1,
           formData: [...formList],
+          resultData: [],
         },
       }),
     );
+    navigate('/');
   };
 
   return (
