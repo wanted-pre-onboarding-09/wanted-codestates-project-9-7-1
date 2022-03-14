@@ -5,7 +5,7 @@ import Editor from '../Editor';
 import {
   updateFieldType,
   updateAddressField,
-} from '../../../store/surveyDataSlice';
+} from '../../../store/makeFormSlice';
 // import moveGrab from '../../../assets/icons8-resize-vertical-24.png';
 import closeBtn from '../../../assets/icons8-close-144.png';
 

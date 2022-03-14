@@ -15,11 +15,12 @@ import AddressField from '../atoms/Field/AddressField';
 import SelectField from '../atoms/Field/SelectField';
 import FileField from '../atoms/Field/FileField';
 import AgreementField from '../atoms/Field/AgreementField';
+import { makeForm } from '../../store/surveyDataSlice';
 import {
   updateFormList,
   addFormList,
   removeFormList,
-} from '../../store/surveyDataSlice';
+} from '../../store/makeFormSlice';
 
 const CreateFormWrap = styled.div`
   margin-top: 3rem;
@@ -35,9 +36,10 @@ const CreateFormWrap = styled.div`
 `;
 
 function CreateFormPage() {
-  const formList = useSelector((state) => state.surveyData.data);
-  const title = useSelector((state) => state.surveyData.title);
-  // const [formList, setFormList] = useState(list);
+  const formList = useSelector((state) => state.makeForm.data);
+  const title = useSelector((state) => state.makeForm.title);
+  const prevFormID = useSelector((state) => state.surveyData.maxID);
+  // const prevSurvay = useSelector((state) => state.surveyData.data);
   const [grabItem, setGrabItem] = useState(null);
   const dispatch = useDispatch();
 
@@ -65,7 +67,18 @@ function CreateFormPage() {
     dispatch(removeFormList(idx));
   };
 
-  const saveForm = () => {};
+  const saveForm = () => {
+    dispatch(
+      makeForm({
+        maxID: prevFormID + 1,
+        newForm: {
+          title,
+          formId: prevFormID + 1,
+          formData: [...formList],
+        },
+      }),
+    );
+  };
 
   return (
     <CreateFormWrap>

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { updateSelectField } from '../../store/surveyDataSlice';
+import { updateSelectField } from '../../store/makeFormSlice';
 
 const OptionSelect = ({ optionValue, index, id, type, label, required }) => {
   const dispatch = useDispatch();

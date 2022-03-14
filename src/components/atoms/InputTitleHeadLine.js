@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { updateTitle } from '../../store/surveyDataSlice';
+import { updateTitle } from '../../store/makeFormSlice';
 
 const InputWrap = styled.input`
   min-width: 600px;
