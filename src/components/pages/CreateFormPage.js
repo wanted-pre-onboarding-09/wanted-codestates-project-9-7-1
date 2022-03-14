@@ -65,9 +65,7 @@ function CreateFormPage() {
     dispatch(removeFormList(idx));
   };
 
-  const saveForm = () => {
-    alert('저장완료');
-  };
+  const saveForm = () => {};
 
   return (
     <CreateFormWrap>
