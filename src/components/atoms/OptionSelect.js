@@ -72,7 +72,7 @@ const OptionSelect = ({ optionValue, index, id, type, label, required }) => {
       <input
         onChange={onChange}
         value={optionVal}
-        placeholder="enter를 누르면 옵션을 추가 할 수 있습니다."
+        placeholder="Enter를 누르면 옵션을 추가 할 수 있습니다."
         type="text"
         className="inputBox"
       />
@@ -89,6 +89,7 @@ const DropDownBox = styled.form`
   }
   input {
     margin: 10px 5px;
+    padding-left: 8px;
     width: 100%;
     background-color: rgba(0, 0, 0, 0);
   }

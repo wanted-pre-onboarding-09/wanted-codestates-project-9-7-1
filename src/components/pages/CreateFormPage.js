@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import TitleHeadLine from '../atoms/TitleHeadLine';
-import InputWrap from '../atoms/InputTitleHeadLine';
+import InputTitleHeadLine from '../atoms/InputTitleHeadLine';
 import FieldListHeadLine from '../atoms/FieldListHeadLIine';
 import AddFieldButton from '../atoms/AddFieldButton';
 import OpenFormButton from '../atoms/OpenFormButton';
@@ -18,10 +18,12 @@ import FileField from '../atoms/Field/FileField';
 import AgreementField from '../atoms/Field/AgreementField';
 import { makeForm } from '../../store/surveyDataSlice';
 import {
+  initializeData,
   updateFormList,
   addFormList,
   removeFormList,
 } from '../../store/makeFormSlice';
+import NoticeModal from '../molecules/NoticeModal';
 
 const CreateFormWrap = styled.div`
   margin-top: 3rem;
@@ -41,8 +43,8 @@ function CreateFormPage() {
   const title = useSelector((state) => state.makeForm.title);
   const prevFormID = useSelector((state) => state.surveyData.maxID);
   // const prevSurvay = useSelector((state) => state.surveyData.data);
-  const navigate = useNavigate();
   const [grabItem, setGrabItem] = useState(null);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const dispatch = useDispatch();
 
   const dragOver = (e) => {
@@ -69,6 +71,13 @@ function CreateFormPage() {
     dispatch(removeFormList(idx));
   };
 
+  const NoticeModalOpenHandler = () => {
+    if (isOpenModal) {
+      dispatch(initializeData());
+    }
+    setIsOpenModal(!isOpenModal);
+  };
+
   const saveForm = () => {
     dispatch(
       makeForm({
@@ -81,13 +90,18 @@ function CreateFormPage() {
         },
       }),
     );
-    navigate('/');
+    NoticeModalOpenHandler();
   };
 
   return (
     <CreateFormWrap>
+      {isOpenModal ? (
+        <NoticeModal NoticeModalOpenHandler={NoticeModalOpenHandler} />
+      ) : (
+        ''
+      )}
       <TitleHeadLine />
-      <InputWrap />
+      <InputTitleHeadLine />
       <FieldListHeadLine />
       {formList.map((form, index) => {
         if (form.id === 'name') {

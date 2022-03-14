@@ -6,9 +6,11 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   .ql-container {
+    font-size: 16px;
     border: none;
     min-height: 50px;
     border-radius: 0 0 7px 7px;
+    color: #6e6e6e;
   }
   .ql-toolbar {
     border: none;
