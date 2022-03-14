@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import TitleHeadLine from '../atoms/TitleHeadLine';
 import InputTitleHeadLine from '../atoms/InputTitleHeadLine';
+import ShowListButton from '../atoms/ShowListButton';
 import FieldListHeadLine from '../atoms/FieldListHeadLIine';
 import AddFieldButton from '../atoms/AddFieldButton';
 import OpenFormButton from '../atoms/OpenFormButton';
@@ -30,6 +31,12 @@ const CreateFormWrap = styled.div`
   display: flex;
   flex-direction: column;
 
+  > .title-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
   > .open-save-Wrap {
     display: flex;
     flex-direction: row;
@@ -97,7 +104,10 @@ function CreateFormPage() {
       ) : (
         ''
       )}
-      <TitleHeadLine />
+      <div className="title-list">
+        <TitleHeadLine />
+        <ShowListButton />
+      </div>
       <InputTitleHeadLine />
       <FieldListHeadLine />
       {formList.map((form, index) => {
