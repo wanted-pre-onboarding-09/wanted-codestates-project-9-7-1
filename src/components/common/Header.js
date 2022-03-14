@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 function Header() {
@@ -8,7 +9,9 @@ function Header() {
       <h1>데이터블</h1>
       <div className="header-bar">
         <h2>최근 설문지</h2>
-        <AiOutlinePlusCircle fill="#fa4646" />
+        <Link to="/create">
+          <AiOutlinePlusCircle fill="#fa4646" />
+        </Link>
       </div>
     </StyeldHeader>
   );

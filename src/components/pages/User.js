@@ -59,6 +59,7 @@ function User() {
             total={formUserData.length}
             page={page}
             setPage={setPage}
+            cnt={1}
           />
         </>
       )}

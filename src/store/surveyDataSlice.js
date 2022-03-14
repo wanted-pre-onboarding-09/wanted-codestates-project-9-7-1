@@ -98,5 +98,4 @@ const surveyDataSlice = createSlice({
 });
 
 export const { makeForm, deleteForm, addResultData } = surveyDataSlice.actions;
-
 export default surveyDataSlice.reducer;
