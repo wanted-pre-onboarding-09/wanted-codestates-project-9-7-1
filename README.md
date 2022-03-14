@@ -1,10 +1,9 @@
-# wanted-codestates-project-9-5-1
-
-데이터블 과제
+# 데이터블 과제
+![image](https://user-images.githubusercontent.com/81687138/158264305-6c1239ce-2b8b-4d11-9cc2-eb6f8b784ac0.png)
 
 ## 프로젝트 소개
 
-- 해시업 폼 구현하기
+- 해시업 폼 구현하기g
 - 기간: 22.03.10~22.03.11
 
 ## 배포링크
@@ -21,12 +20,12 @@
 
 ## 팀원 소개
 
-|  이름  |    Role     |
-| :----: | :---------: |
-| 유송현 | Team Leader |
-| 서한석 | Team Member |
-| 윤솔비 | Team member |
-| 조영제 | Team member |
+| 이름   | 직책 | 역할                 |
+| ----- | -- | -------------------- |
+| [유송현](https://github.com/ysh2987) | 팀장 | 생성된 폼 목록 / 입력된 데이터 목록 |
+| [서한석](https://github.com/holystorySeo) | 팀원 | 폼 생성 |
+| [윤솔비](https://github.com/y-solb) | 팀원 | 생성된 폼 |
+| [조영제](https://github.com/youngjeJO) | 팀원 | 폼 생성 |
 
 ## 기술 스택
 
@@ -46,7 +45,6 @@
 - 폼 생성
 - 생성된 폼
 - 입력된 데이터 목록
-
 ```
 
 ## 작업 내용
@@ -56,9 +54,9 @@
   - 생성된 폼별로 제목 / 사용자 목록 / 삭제가능 하도록 구현하였습니다.
   - 작성한 폼이 많아질 경우를 고려해 pagination으로 5개씩 나누어 화면에 보여주었습니다.
   - 요구사항엔 없었지만 폼이 많아졌을 경우 사용자가 원하는 폼에 접근할 수 있도록 검색할 수 있는 기능을 추가하였습니다.
-  - 입력된 데이터 목록 또한 pagination으로 구현하였으며, 사용자가 보기 쉽게 필수 요소인 경우 화면에 추가적으로 나타내었습니다.
-![image](https://user-images.githubusercontent.com/81687138/158105796-dfd0afe2-200e-4bad-b029-e54bb3692c3d.png)
-![image](https://user-images.githubusercontent.com/81687138/158105811-93d34a28-5fa1-4999-bcd4-c7d2aff60050.png)
+  - 입력된 데이터 목록 또한 pagination으로 구현하였으며, 작성자 리스트 또한 필수 요소인 경우 화면에 추가적으로 나타내었습니다.
+  - Form 삭제시 react toaster로 알람 처리 하였습니다.
+  
 
 ### 서한석
 
