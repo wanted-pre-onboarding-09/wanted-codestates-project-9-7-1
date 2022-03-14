@@ -1,5 +1,5 @@
 # 데이터블 과제
-![image](https://user-images.githubusercontent.com/81687138/158261092-a5097335-1c11-49d2-8b1a-6ab7e1a11ffb.png){: width="33.3%" height="auto"}
+![image](https://user-images.githubusercontent.com/81687138/158261092-a5097335-1c11-49d2-8b1a-6ab7e1a11ffb.png){: width="100" height="100"}
 
 ## 프로젝트 소개
 
