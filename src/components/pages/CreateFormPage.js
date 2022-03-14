@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import TitleHeadLine from '../atoms/TitleHeadLine';
 import InputTitleHeadLine from '../atoms/InputTitleHeadLine';
 import ShowListButton from '../atoms/ShowListButton';
@@ -49,7 +48,6 @@ function CreateFormPage() {
   const formList = useSelector((state) => state.makeForm.data);
   const title = useSelector((state) => state.makeForm.title);
   const prevFormID = useSelector((state) => state.surveyData.maxID);
-  // const prevSurvay = useSelector((state) => state.surveyData.data);
   const [grabItem, setGrabItem] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const dispatch = useDispatch();
