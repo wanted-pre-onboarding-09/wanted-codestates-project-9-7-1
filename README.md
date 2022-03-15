@@ -61,7 +61,36 @@
 ### 서한석
 
 ### 윤솔비
+- 생성된 폼 
+  - 선택된 폼 양식에 따라 생성된 폼을 구현해 줬습니다.
+  - 필수 폼이 입력되지 읺거나 형식이 틀린 경우 안내 문구로 사용자에게 알려줬습니다.
+  - 배송지는 카카오 우편번호 서비스를 이용했습니다.
+  - 정규식을 통해 휴대폰 번호가 올바른지 확인해 주고 -(하이픈)이 자동으로 삽입되도록 구현했습니다.
+  - 첨부파일 업로드 완료 시 미리보기로 첨부파일을 보여줄 수 있도록 했습니다.
+  - 모든 필수 폼이 입력되었을 때 '제출하기' 버튼을 활성화시켜줬습니다.
+  - '제출하기'가 완료 시 toaster로 완료 알람을 띄워줬습니다.
+  - 아래와 같이 필수 폼인지 확인하여 필수 값이라면 false 값을 넣어줬습니다. isAllChecked의 모든 값이 true일 경우 '제출하기' 버튼을 활성화시켜 줬습니다.
+  
+  ```
+  const nameValue = selectedData.formData.find((el) => el.id === 'name');
+  const phoneValue = selectedData.formData.find((el) => el.id === 'phone');
+  const addressValue = selectedData.formData.find((el) => el.id === 'address');
+  const optionValue = selectedData.formData.find((el) => el.id === 'input_0');
+  const imgValue = selectedData.formData.find((el) => el.id === 'input_1');
+  const agreementValue = selectedData.formData.find(
+    (el) => el.id === 'agreement_0',
+  );
 
+  const [isAllChecked, setIsAllChecked] = useState({
+    isName: nameValue ? !nameValue.required : true,
+    isPhone: phoneValue ? !phoneValue.required : true,
+    isAddress: addressValue ? !addressValue.required : true,
+    isOption: optionValue ? !optionValue.required : true,
+    isImg: imgValue ? !imgValue.required : true,
+    isAgreement: agreementValue ? !agreementValue.required : true,
+  });
+  ```
+  
 ### 조영제
 
 ## 디렉터리 구조
