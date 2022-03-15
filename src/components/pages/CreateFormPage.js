@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import TitleHeadLine from '../atoms/TitleHeadLine';
 import InputTitleHeadLine from '../atoms/InputTitleHeadLine';
 import ShowListButton from '../atoms/ShowListButton';
@@ -50,6 +51,7 @@ function CreateFormPage() {
   const prevFormID = useSelector((state) => state.surveyData.maxID);
   const [grabItem, setGrabItem] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [formId, setFormId] = useState(null);
   const dispatch = useDispatch();
 
   const dragOver = (e) => {
@@ -96,6 +98,7 @@ function CreateFormPage() {
       }),
     );
     NoticeModalOpenHandler();
+    setFormId(prevFormID + 1);
   };
 
   return (
@@ -223,7 +226,11 @@ function CreateFormPage() {
       })}
       <AddFieldButton addField={addField} />
       <div className="open-save-Wrap">
-        <OpenFormButton />
+        {formId && (
+          <Link to={`/form/${formId}`}>
+            <OpenFormButton />
+          </Link>
+        )}
         {formList.filter((form) => {
           return form.label === '';
         }).length === 0 && title ? (
