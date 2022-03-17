@@ -60,6 +60,7 @@
 
 ### 서한석
 - 폼 생성하기 기능 구현
+
   |마크업과 스타일링|필드 추가와 삭제|드래그 앤 드랍|폼 저장|
   |:-:|:-:|:-:|:-:|
   |<img src="https://user-images.githubusercontent.com/87353284/158739152-0f2e500a-4a24-40e5-9821-8624185059ec.png" width="120%">|<img src="https://user-images.githubusercontent.com/87353284/158739879-e9f2fe91-ec10-4803-ad78-bbbe139eb4c9.gif" width="140%">|<img src="https://user-images.githubusercontent.com/87353284/158740442-dd388761-eec2-46ed-9ff8-5f11579feec5.gif" width="100%">|<img src="https://user-images.githubusercontent.com/87353284/158740545-53d43689-814f-491a-a7f0-d08e73850d2c.gif" width="120%">|
